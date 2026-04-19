@@ -185,4 +185,18 @@ public class ListFrame extends javax.swing.JFrame {
             tableModel.setValueAt("",i, 4);
         }
     }
+    String calcularSalario(String strSeniority, String strCategory)
+    {
+        if (Integer.valueOf(strCategory) < 5)
+            return "20000";
+        else if (Integer.valueOf(strCategory) >= 5 || Integer.valueOf(strCategory) < 10)
+            switch (strCategory){
+                case "developer": return "30000";
+                case "analyst" : return "40000";
+                case "manager" : return "50000";
+                default : System.out.println("Error");
+        }
+        else { return "50000"; }
+        return null;
+    }
 }
