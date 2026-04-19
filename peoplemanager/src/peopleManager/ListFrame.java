@@ -33,6 +33,8 @@ public class ListFrame extends javax.swing.JFrame {
         empleados.add("8,Domitian,Augustus,11,Manager");
         empleados.add("9,Trajan,Optimus,13,CTO");
         empleados.add("10,Hadrian,Aelius,10,DevOps");
+        
+        this.rellenarTablaEmpleados();
     }
     
     
@@ -85,6 +87,11 @@ public class ListFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableEmpleadosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableEmpleados);
         if (jTableEmpleados.getColumnModel().getColumnCount() > 0) {
             jTableEmpleados.getColumnModel().getColumn(0).setResizable(false);
@@ -121,6 +128,15 @@ public class ListFrame extends javax.swing.JFrame {
     private void jButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonNewActionPerformed
+
+    private void jTableEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEmpleadosMouseClicked
+        int row = this.jTableEmpleados.getSelectedRow();
+        
+        DetailFrame detailFrame = new DetailFrame(empleados.get(row), this);
+        
+        detailFrame.setVisible(true);
+        
+    }//GEN-LAST:event_jTableEmpleadosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -163,40 +179,75 @@ public class ListFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTableEmpleados;
     // End of variables declaration//GEN-END:variables
     
-    private void rellenarTablaEmpleados(){
+    public void rellenarTablaEmpleados(){
         DefaultTableModel defaultTable = (DefaultTableModel) this.jTableEmpleados.getModel();
         defaultTable.setRowCount(empleados.size());
         
         TableModel tableModel = this.jTableEmpleados.getModel();
         
         for(int i=0; i<empleados.size(); i++){
-            String employee = empleados.get(i);
-            String[] segments = employee.split(",");
-            String id = segments[0];
-            String name = segments[1];
-            String surname = segments[2];
-            String seniority = segments[3];
-            String category = segments[4];
+            String empleado = empleados.get(i);
+            String[] trozo = empleado.split(",");
+            String id = trozo[0];
+            String nombre = trozo[1];
+            String apellido = trozo[2];
+            String antiguedad = trozo[3];
+            String category = trozo[4];
             
             tableModel.setValueAt(id,i, 0);
-            tableModel.setValueAt(name + " " + surname,i, 1);
-            tableModel.setValueAt(seniority,i, 2);
+            tableModel.setValueAt(nombre+  " " + apellido,i, 1);
+            tableModel.setValueAt(antiguedad,i, 2);
             tableModel.setValueAt(category,i, 3);
             tableModel.setValueAt("",i, 4);
         }
     }
-    String calcularSalario(String strSeniority, String strCategory)
-    {
-        if (Integer.valueOf(strCategory) < 5)
+    
+    String calcularSalario(String strAntiguedad, String strCategory) {
+
+        int antiguedad = Integer.valueOf(strAntiguedad);
+
+        if (antiguedad < 5) {
             return "20000";
-        else if (Integer.valueOf(strCategory) >= 5 || Integer.valueOf(strCategory) < 10)
-            switch (strCategory){
-                case "developer": return "30000";
-                case "analyst" : return "40000";
-                case "manager" : return "50000";
-                default : System.out.println("Error");
         }
-        else { return "50000"; }
-        return null;
+        
+        String cat = strCategory.toLowerCase();
+
+        if (antiguedad >= 5 && antiguedad < 10) {
+            switch (cat) {
+                case "backend":
+                    return "30000";
+                case "devops":
+                    return "35000";
+                default: /* TechLead */
+                    return "45000";
+            }
+        }
+
+        if (antiguedad >= 10) {
+            switch (cat) {
+                case "cto":
+                    return "60000";
+                case "devops":
+                    return "55000";
+                default: /* Backend */
+                    return "50000";
+            }
+        }
+
+        return "0";
+    }
+    
+    public void actualizarEmpleado(String empleadoActualizado){
+        String[] datosEmpleado = empleadoActualizado.split(",");
+        String id = datosEmpleado[0];
+        for(int i=0; i<empleados.size(); i++){
+            String empleado = empleados.get(i);
+            String[] strDatosEmpleado = empleado.split(",");
+        if(strDatosEmpleado[0].equals(id)){
+            empleados.set(i, empleadoActualizado);
+            break;
+            }
+        }
+        this.rellenarTablaEmpleados();
     }
 }

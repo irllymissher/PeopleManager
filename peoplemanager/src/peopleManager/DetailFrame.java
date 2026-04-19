@@ -24,31 +24,64 @@ public class DetailFrame extends javax.swing.JFrame {
         this.listFrame = listFrame;
         
         jComboBoxCategoria.setModel(
-                new DefaultComboBoxModel<>(new String[] {
-                    "developer", 
-                    "analyst", 
-                    "manager"}));
+            new DefaultComboBoxModel<>(new String[] {
+                "Developer",
+                "Analyst",
+                "Manager",
+                "Backend",
+                "DevOps",
+                "TechLead",
+                "CTO"
+            })
+        );
         
-        jTextFieldNombreEmpleado.setText("Introduce su nombre");
-        jTextFieldApellidoEmpleado.setText("Introduzca su apellido");
-        jTextFieldAntiguedadEmpleado.setText("Introduzca los años de antiguedad que tiene");
         
-        idEmpleado = this.idEmpleado;
+        
+        String[] datosEmpleado = empleado.split(",");
+        
+        this.idEmpleado = datosEmpleado[0];
+        
+        jTextFieldNombreEmpleado.setText(datosEmpleado[1]);
+        jTextFieldApellidoEmpleado.setText(datosEmpleado[2]);
+        jTextFieldAntiguedadEmpleado.setText(datosEmpleado[3]);
+        jComboBoxCategoria.setSelectedItem(datosEmpleado[4]);
+        
+        
     }
     
-    String calcularSalario(String strSeniority, String strCategory)
-    {
-        if (Integer.valueOf(strCategory) < 5)
+    String calcularSalario(String seniority, String category) {
+
+        int s = Integer.valueOf(seniority);
+
+        if (s < 5) {
             return "20000";
-        else if (Integer.valueOf(strCategory) >= 5 || Integer.valueOf(strCategory) < 10)
-            switch (strCategory){
-                case "developer": return "30000";
-                case "analyst" : return "40000";
-                case "manager" : return "50000";
-                default : System.out.println("Error");
         }
-        else { return "50000"; }
-        return null;
+        
+        String cat = category.toLowerCase();
+
+        if (s >= 5 && s < 10) {
+            switch (cat) {
+                case "backend":
+                    return "30000";
+                case "devops":
+                    return "35000";
+                default: /* TechLead */
+                    return "45000";
+            }
+        }
+
+        if (s >= 10) {
+            switch (cat) {
+                case "cto":
+                    return "60000";
+                case "devops":
+                    return "55000";
+                default: /* Backend */
+                    return "50000";
+            }
+        }
+
+        return "0";
     }
 
     /**
@@ -92,6 +125,11 @@ public class DetailFrame extends javax.swing.JFrame {
         jButtonCalcularSalario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonCalcularSalarioMouseClicked(evt);
+            }
+        });
+        jButtonCalcularSalario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCalcularSalarioActionPerformed(evt);
             }
         });
 
@@ -188,14 +226,14 @@ public class DetailFrame extends javax.swing.JFrame {
         String antiguedad = this.jTextFieldAntiguedadEmpleado.getText();
         String categoria = this.jComboBoxCategoria.getSelectedItem().toString();
         
-        String salario = calcularSalario(categoria, categoria);
+        String salario = calcularSalario(antiguedad, categoria);
         
         this.jLabelSalarioEmpleado.setText(salario);
 
     }//GEN-LAST:event_jButtonCalcularSalarioMouseClicked
 
     private void jButtonGuardarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGuardarEmpleadoMouseClicked
-        this.listFrame.updateEmployee(
+        this.listFrame.actualizarEmpleado(
                 this.idEmpleado + "," +
                 this.jTextFieldNombreEmpleado.getText()+","+
                 this.jTextFieldApellidoEmpleado.getText()+","+
@@ -204,6 +242,10 @@ public class DetailFrame extends javax.swing.JFrame {
         );
         this.dispose();
     }//GEN-LAST:event_jButtonGuardarEmpleadoMouseClicked
+
+    private void jButtonCalcularSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularSalarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonCalcularSalarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,9 +276,7 @@ public class DetailFrame extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DetailFrame().setVisible(true);
-            }
+            public void run() {}
         });
     }
 
