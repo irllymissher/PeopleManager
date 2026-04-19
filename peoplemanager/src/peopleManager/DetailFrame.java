@@ -14,13 +14,14 @@ import javax.swing.DefaultComboBoxModel;
 public class DetailFrame extends javax.swing.JFrame {
 
     private String idEmpleado;
-    
+    ListFrame listFrame;
     
     /**
      * Creates new form DetailFrame
      */
-    public DetailFrame(String empleado) {
+    public DetailFrame(String empleado, ListFrame listFrame) {
         initComponents();
+        this.listFrame = listFrame;
         
         jComboBoxCategoria.setModel(
                 new DefaultComboBoxModel<>(new String[] {
@@ -33,6 +34,21 @@ public class DetailFrame extends javax.swing.JFrame {
         jTextFieldAntiguedadEmpleado.setText("Introduzca los años de antiguedad que tiene");
         
         idEmpleado = this.idEmpleado;
+    }
+    
+    String calcularSalario(String strSeniority, String strCategory)
+    {
+        if (Integer.valueOf(strCategory) < 5)
+            return "20000";
+        else if (Integer.valueOf(strCategory) >= 5 || Integer.valueOf(strCategory) < 10)
+            switch (strCategory){
+                case "developer": return "30000";
+                case "analyst" : return "40000";
+                case "manager" : return "50000";
+                default : System.out.println("Error");
+        }
+        else { return "50000"; }
+        return null;
     }
 
     /**
@@ -56,7 +72,7 @@ public class DetailFrame extends javax.swing.JFrame {
         jTextFieldAntiguedadEmpleado = new javax.swing.JTextField();
         jLabelSalarioEmpleado = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabelNombre.setText("Nombre");
 
@@ -73,8 +89,18 @@ public class DetailFrame extends javax.swing.JFrame {
         jLabelCategoria.setText("Categoria");
 
         jButtonCalcularSalario.setText("Calcula salario");
+        jButtonCalcularSalario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonCalcularSalarioMouseClicked(evt);
+            }
+        });
 
         jButtonGuardarEmpleado.setText("Guardar");
+        jButtonGuardarEmpleado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonGuardarEmpleadoMouseClicked(evt);
+            }
+        });
         jButtonGuardarEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonGuardarEmpleadoActionPerformed(evt);
@@ -156,6 +182,28 @@ public class DetailFrame extends javax.swing.JFrame {
     private void jButtonGuardarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarEmpleadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonGuardarEmpleadoActionPerformed
+
+    private void jButtonCalcularSalarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCalcularSalarioMouseClicked
+
+        String antiguedad = this.jTextFieldAntiguedadEmpleado.getText();
+        String categoria = this.jComboBoxCategoria.getSelectedItem().toString();
+        
+        String salario = calcularSalario(categoria, categoria);
+        
+        this.jLabelSalarioEmpleado.setText(salario);
+
+    }//GEN-LAST:event_jButtonCalcularSalarioMouseClicked
+
+    private void jButtonGuardarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGuardarEmpleadoMouseClicked
+        this.listFrame.updateEmployee(
+                this.idEmpleado + "," +
+                this.jTextFieldNombreEmpleado.getText()+","+
+                this.jTextFieldApellidoEmpleado.getText()+","+
+                this.jTextFieldAntiguedadEmpleado.getText()+","+
+                this.jComboBoxCategoria.getSelectedItem().toString()
+        );
+        this.dispose();
+    }//GEN-LAST:event_jButtonGuardarEmpleadoMouseClicked
 
     /**
      * @param args the command line arguments
