@@ -14,56 +14,46 @@ import javax.swing.DefaultComboBoxModel;
 public class DetailFrame extends javax.swing.JFrame {
 
     private String idEmpleado;
+    
+    private Empleado empleado;
+    
     ListFrame listFrame;
     
     /**
      * Creates new form DetailFrame
+     * @param empleado
+     * @param listFrame
      */
-    public DetailFrame(String empleado, ListFrame listFrame) {
+    public DetailFrame(Empleado empleado, ListFrame listFrame) {
         initComponents();
         this.listFrame = listFrame;
         
-        jComboBoxCategoria.setModel(
-            new DefaultComboBoxModel<>(new String[] {
-                "Developer",
-                "Analyst",
-                "Manager",
-                "Backend",
-                "DevOps",
-                "TechLead",
-                "CTO"
-            })
-        );
+        for (Categoria categoria : Categoria.values()){
+            this.jComboBoxCategoria.addItem(categoria.toString());
+        }
+        this.empleado = empleado;
         
+        this.idEmpleado = empleado.objectId;
         
-        
-        String[] datosEmpleado = empleado.split(",");
-        
-        this.idEmpleado = datosEmpleado[0];
-        
-        jTextFieldNombreEmpleado.setText(datosEmpleado[1]);
-        jTextFieldApellidoEmpleado.setText(datosEmpleado[2]);
-        jTextFieldAntiguedadEmpleado.setText(datosEmpleado[3]);
-        jComboBoxCategoria.setSelectedItem(datosEmpleado[4]);
-        
-        
+        jTextFieldNombreEmpleado.setText(empleado.nombre);
+        jTextFieldApellidoEmpleado.setText(empleado.apellido);
+        jTextFieldAntiguedadEmpleado.setText(empleado.antiguedad);
+        jComboBoxCategoria.setSelectedItem(empleado.categoria);
     }
     
-    String calcularSalario(String seniority, String category) {
+    String calcularSalario(String antiguedad, Categoria categoria) {
 
-        int s = Integer.valueOf(seniority);
+        int s = Integer.valueOf(antiguedad);
 
         if (s < 5) {
             return "20000";
         }
-        
-        String cat = category.toLowerCase();
 
         if (s >= 5 && s < 10) {
-            switch (cat) {
-                case "backend":
+            switch (categoria) {
+                case BACKEND:
                     return "30000";
-                case "devops":
+                case DEVOPS:
                     return "35000";
                 default: /* TechLead */
                     return "45000";
@@ -71,10 +61,10 @@ public class DetailFrame extends javax.swing.JFrame {
         }
 
         if (s >= 10) {
-            switch (cat) {
-                case "cto":
+            switch (categoria) {
+                case CTO:
                     return "60000";
-                case "devops":
+                case DEVOPS:
                     return "55000";
                 default: /* Backend */
                     return "50000";
@@ -224,7 +214,8 @@ public class DetailFrame extends javax.swing.JFrame {
     private void jButtonCalcularSalarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCalcularSalarioMouseClicked
 
         String antiguedad = this.jTextFieldAntiguedadEmpleado.getText();
-        String categoria = this.jComboBoxCategoria.getSelectedItem().toString();
+        String categoriaSeleccionada = this.jComboBoxCategoria.getSelectedItem().toString();
+        Categoria categoria = Categoria.valueOf(categoriaSeleccionada);
         
         String salario = calcularSalario(antiguedad, categoria);
         
@@ -233,13 +224,14 @@ public class DetailFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCalcularSalarioMouseClicked
 
     private void jButtonGuardarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGuardarEmpleadoMouseClicked
-        this.listFrame.actualizarEmpleado(
-                this.idEmpleado + "," +
-                this.jTextFieldNombreEmpleado.getText()+","+
-                this.jTextFieldApellidoEmpleado.getText()+","+
-                this.jTextFieldAntiguedadEmpleado.getText()+","+
-                this.jComboBoxCategoria.getSelectedItem().toString()
-        );
+        empleado.nombre = this.jTextFieldNombreEmpleado.getText();
+        empleado.apellido = this.jTextFieldApellidoEmpleado.getText();
+        empleado.antiguedad = this.jTextFieldAntiguedadEmpleado.getText();
+        
+        String categoriaSeleccionada = this.jComboBoxCategoria.getSelectedItem().toString();
+        empleado.categoria = Categoria.valueOf(categoriaSeleccionada);
+        
+        this.listFrame.actualizarEmpleado(empleado);
         this.dispose();
     }//GEN-LAST:event_jButtonGuardarEmpleadoMouseClicked
 
