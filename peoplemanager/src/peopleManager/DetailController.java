@@ -1,6 +1,8 @@
 package peopleManager;
 
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import javax.swing.JButton;
 
 /**
  *
@@ -11,11 +13,18 @@ public class DetailController {
     private Empleado empleado;
 
     public DetailController() {
+        
         ArrayList<String> categorias = new ArrayList<String>();
         for(Categoria cat : Categoria.values()){
             categorias.add(cat.toString());
         }
+        
         this.vista = new DetailFrame(categorias);
+        
+        JButton buttonCalculate= this.vista.getjButtonCalcularSalario();
+        buttonCalculate.addActionListener((ActionEvent e) -> {
+            calcularSalario();
+            });
     }
     
     public void cargarEmpleado(Empleado empleado){
