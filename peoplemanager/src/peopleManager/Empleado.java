@@ -13,15 +13,13 @@ public class Empleado {
     public String nombre;
     public String apellido;
     public String antiguedad;
-    // todo categoria
+    public Categoria categoria;
 
-    public Empleado(String objectId, String nombre, String apellido, String antiguedad) {
+    public Empleado(String objectId, String nombre, String apellido, String antiguedad, Categoria categoria) {
         this.objectId = objectId;
         this.nombre = nombre;
         this.apellido = apellido;
         this.antiguedad = antiguedad;
-        // todo categoria
+        this.categoria = categoria;
     }
-    
-    
 }
