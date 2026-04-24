@@ -30,6 +30,8 @@ public class ListController {
         empleados.add(new Empleado("8", "Domitian", "Augustus", "11", Categoria.MANAGER));
         empleados.add(new Empleado("9", "Trajan", "Optimus", "13", Categoria.CTO));
         empleados.add(new Empleado("10", "Hadrian", "Aelius", "10", Categoria.DEVOPS));
+        
+        this.rellenarTablaEmpleados();
     }
     
     private void rellenarTablaEmpleados(){
