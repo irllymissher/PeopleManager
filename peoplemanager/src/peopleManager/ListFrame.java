@@ -186,50 +186,20 @@ public class ListFrame extends javax.swing.JFrame {
         TableModel tableModel = this.jTableEmpleados.getModel();
         
         for(int i=0; i<empleados.size(); i++){
-            Empleado employee = empleados.get(i);
+            Empleado empleado = empleados.get(i);
             
-            String id = employee.objectId;
-            String nombre = employee.nombre;
-            String apellido = employee.apellido;
-            String antiguedad = employee.antiguedad;
-            Categoria categoria = employee.categoria;
+            String id = empleado.objectId;
+            String nombre = empleado.nombre;
+            String apellido = empleado.apellido;
+            String antiguedad = empleado.antiguedad;
+            Categoria categoria = empleado.categoria;
             
             tableModel.setValueAt(id,i, 0);
             tableModel.setValueAt(nombre+  " " + apellido,i, 1);
             tableModel.setValueAt(antiguedad,i, 2);
             tableModel.setValueAt(categoria,i, 3);
-            tableModel.setValueAt(calcularSalario(antiguedad, categoria),i, 4);
+            tableModel.setValueAt(empleado.calcularSalario(),i, 4);
         }
-    }
-    
-    String calcularSalario(String strAntiguedad, Categoria strCategory) {
-
-        int antiguedad = Integer.valueOf(strAntiguedad);
-
-        if (antiguedad < 5) {
-            return "20000";
-        }
-        if (antiguedad >= 5 && antiguedad < 10) {
-            switch (strCategory) {
-                case BACKEND:
-                    return "30000";
-                case DEVOPS:
-                    return "35000";
-                default: /* TechLead */
-                    return "45000";
-            }
-        }
-        if (antiguedad >= 10) {
-            switch (strCategory) {
-                case CTO:
-                    return "60000";
-                case DEVOPS:
-                    return "55000";
-                default: /* Backend */
-                    return "50000";
-            }
-        }
-        return "0";
     }
     
     public void actualizarEmpleado(Empleado empleadoPorActualizar){

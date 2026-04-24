@@ -40,39 +40,6 @@ public class DetailFrame extends javax.swing.JFrame {
         jTextFieldAntiguedadEmpleado.setText(empleado.antiguedad);
         jComboBoxCategoria.setSelectedItem(empleado.categoria);
     }
-    
-    String calcularSalario(String antiguedad, Categoria categoria) {
-
-        int s = Integer.valueOf(antiguedad);
-
-        if (s < 5) {
-            return "20000";
-        }
-
-        if (s >= 5 && s < 10) {
-            switch (categoria) {
-                case BACKEND:
-                    return "30000";
-                case DEVOPS:
-                    return "35000";
-                default: /* TechLead */
-                    return "45000";
-            }
-        }
-
-        if (s >= 10) {
-            switch (categoria) {
-                case CTO:
-                    return "60000";
-                case DEVOPS:
-                    return "55000";
-                default: /* Backend */
-                    return "50000";
-            }
-        }
-
-        return "0";
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -217,7 +184,7 @@ public class DetailFrame extends javax.swing.JFrame {
         String categoriaSeleccionada = this.jComboBoxCategoria.getSelectedItem().toString();
         Categoria categoria = Categoria.valueOf(categoriaSeleccionada);
         
-        String salario = calcularSalario(antiguedad, categoria);
+        String salario = empleado.calcularSalario();
         
         this.jLabelSalarioEmpleado.setText(salario);
 
