@@ -6,6 +6,9 @@
 package peopleManager;
 
 import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -22,19 +25,6 @@ public class ListFrame extends javax.swing.JFrame {
      */
     public ListFrame() {
         initComponents();
-        
-        empleados.add(new Empleado("1", "Augustus", "Caesar", "15", Categoria.CTO));
-        empleados.add(new Empleado("2", "Tiberius", "Claudius", "12", Categoria.MANAGER));
-        empleados.add(new Empleado("3", "Caligula", "Germanicus", "8", Categoria.BACKEND));
-        empleados.add(new Empleado("4", "Claudius", "Nero", "10", Categoria.DEVOPS));
-        empleados.add(new Empleado("5", "Nero", "Augustus", "6", Categoria.DEVELOPER));
-        empleados.add(new Empleado("6", "Vespasian", "Flavius", "14", Categoria.TECHLEAD));
-        empleados.add(new Empleado("7", "Titus", "Flavius", "9", Categoria.BACKEND));
-        empleados.add(new Empleado("8", "Domitian", "Augustus", "11", Categoria.MANAGER));
-        empleados.add(new Empleado("9", "Trajan", "Optimus", "13", Categoria.CTO));
-        empleados.add(new Empleado("10", "Hadrian", "Aelius", "10", Categoria.DEVOPS));
-        
-        this.rellenarTablaEmpleados();
     }
     
     
@@ -130,12 +120,7 @@ public class ListFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonNewActionPerformed
 
     private void jTableEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEmpleadosMouseClicked
-        int row = this.jTableEmpleados.getSelectedRow();
-        
-        DetailFrame detailFrame = new DetailFrame(empleados.get(row), this);
-        
-        detailFrame.setVisible(true);
-        
+
     }//GEN-LAST:event_jTableEmpleadosMouseClicked
 
     /**
@@ -178,46 +163,18 @@ public class ListFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableEmpleados;
     // End of variables declaration//GEN-END:variables
-    
-    public void rellenarTablaEmpleados(){
-        DefaultTableModel defaultTable = (DefaultTableModel) this.jTableEmpleados.getModel();
-        defaultTable.setRowCount(empleados.size());
-        
-        TableModel tableModel = this.jTableEmpleados.getModel();
-        
-        for(int i=0; i<empleados.size(); i++){
-            Empleado empleado = empleados.get(i);
-            
-            String id = empleado.objectId;
-            String nombre = empleado.nombre;
-            String apellido = empleado.apellido;
-            String antiguedad = empleado.antiguedad;
-            Categoria categoria = empleado.categoria;
-            
-            tableModel.setValueAt(id,i, 0);
-            tableModel.setValueAt(nombre+  " " + apellido,i, 1);
-            tableModel.setValueAt(antiguedad,i, 2);
-            tableModel.setValueAt(categoria,i, 3);
-            tableModel.setValueAt(empleado.calcularSalario(),i, 4);
-        }
+
+    public JButton getjButtonNew() {
+        return jButtonNew;
     }
-    
-    public void actualizarEmpleado(Empleado empleadoPorActualizar){
-        String id = empleadoPorActualizar.objectId;
-        for(int i=0; i<empleados.size(); i++){
-            Empleado empleado = empleados.get(i);
-        if(empleado.objectId.equalsIgnoreCase(id)){
-            empleados.set(i, empleadoPorActualizar);
-            break;
-            }
-        }
-        this.rellenarTablaEmpleados();
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
     }
-    
-    public void insertarEmpleado(Empleado empleadoParaInsertar){
-        String id = String.valueOf(empleados.size() + 1);
-        empleadoParaInsertar.objectId = id;
-        this.empleados.add(empleadoParaInsertar);
-        rellenarTablaEmpleados();
+
+    public JTable getjTableEmpleados() {
+        return jTableEmpleados;
     }
+
+    
 }
