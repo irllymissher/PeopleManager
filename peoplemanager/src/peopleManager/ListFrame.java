@@ -36,18 +36,10 @@ public class ListFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonNew = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableEmpleados = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jButtonNew.setText("New");
-        jButtonNew.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNewActionPerformed(evt);
-            }
-        });
 
         jTableEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,11 +67,6 @@ public class ListFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTableEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableEmpleadosMouseClicked(evt);
-            }
-        });
         jScrollPane1.setViewportView(jTableEmpleados);
         if (jTableEmpleados.getColumnModel().getColumnCount() > 0) {
             jTableEmpleados.getColumnModel().getColumn(0).setResizable(false);
@@ -94,28 +81,20 @@ public class ListFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jButtonNew, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonNew, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonNewActionPerformed
 
     private void jTableEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEmpleadosMouseClicked
 
@@ -123,7 +102,6 @@ public class ListFrame extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonNew;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableEmpleados;
     // End of variables declaration//GEN-END:variables
@@ -158,9 +136,6 @@ public class ListFrame extends javax.swing.JFrame {
                 ListController listController = new ListController();
             }
         });
-    }
-    public JButton getjButtonNew() {
-        return jButtonNew;
     }
 
     public JScrollPane getjScrollPane1() {
