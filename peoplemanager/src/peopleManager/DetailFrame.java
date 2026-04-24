@@ -312,6 +312,13 @@ public class DetailFrame extends javax.swing.JFrame {
     public JTextField getjTextFieldNombreEmpleado() {
         return jTextFieldNombreEmpleado;
     }
-
+    
+    public void open(){
+        this.setVisible(true);
+    }
+    
+    public void close(){
+        this.setVisible(false);
+    }
     
 }
