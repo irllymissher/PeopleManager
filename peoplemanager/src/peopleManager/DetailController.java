@@ -1,5 +1,7 @@
 package peopleManager;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author alumno
@@ -7,6 +9,14 @@ package peopleManager;
 public class DetailController {
     private DetailFrame vista;
     private Empleado empleado;
+
+    public DetailController() {
+        ArrayList<String> categorias = new ArrayList<String>();
+        for(Categoria cat : Categoria.values()){
+            categorias.add(cat.toString());
+        }
+        this.vista = new DetailFrame(categorias);
+    }
     
     public void cargarEmpleado(Empleado empleado){
         this.empleado = empleado;
