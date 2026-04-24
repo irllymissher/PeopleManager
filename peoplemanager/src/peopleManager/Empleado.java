@@ -22,4 +22,41 @@ public class Empleado {
         this.antiguedad = antiguedad;
         this.categoria = categoria;
     }
+    
+    String calcularSalario() {
+
+        int s = Integer.valueOf(antiguedad);
+
+        if (s < 5) {
+            return "20000";
+        }
+
+        if (s >= 5 && s < 10) {
+            switch (categoria) {
+                case BACKEND:
+                    return "30000";
+                case DEVOPS:
+                    return "35000";
+                default: /* TechLead */
+                    return "45000";
+            }
+        }
+
+        if (s >= 10) {
+            switch (categoria) {
+                case CTO:
+                    return "60000";
+                case DEVOPS:
+                    return "55000";
+                default: /* Backend */
+                    return "50000";
+            }
+        }
+
+        return "0";
+    }
+    
+    public String nameDescription(){
+        return nombre + apellido;
+    }
 }
