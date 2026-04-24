@@ -5,6 +5,7 @@
  */
 package peopleManager;
 
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,33 +17,18 @@ import javax.swing.JTextField;
  * @author tomif
  */
 public class DetailFrame extends javax.swing.JFrame {
-
-    private String idEmpleado;
-    
-    private Empleado empleado;
-    
-    ListFrame listFrame;
     
     /**
      * Creates new form DetailFrame
      * @param empleado
      * @param listFrame
      */
-    public DetailFrame(Empleado empleado, ListFrame listFrame) {
+    public DetailFrame(ArrayList<String> Categoria) {
         initComponents();
-        this.listFrame = listFrame;
         
-        for (Categoria categoria : Categoria.values()){
-            this.jComboBoxCategoria.addItem(categoria.toString());
+        for (String categoria : Categoria){
+            this.jComboBoxCategoria.addItem(categoria);
         }
-        this.empleado = empleado;
-        
-        this.idEmpleado = empleado.objectId;
-        
-        jTextFieldNombreEmpleado.setText(empleado.nombre);
-        jTextFieldApellidoEmpleado.setText(empleado.apellido);
-        jTextFieldAntiguedadEmpleado.setText(empleado.antiguedad);
-        jComboBoxCategoria.setSelectedItem(empleado.categoria);
     }
 
     /**
@@ -184,26 +170,10 @@ public class DetailFrame extends javax.swing.JFrame {
 
     private void jButtonCalcularSalarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonCalcularSalarioMouseClicked
 
-        String antiguedad = this.jTextFieldAntiguedadEmpleado.getText();
-        String categoriaSeleccionada = this.jComboBoxCategoria.getSelectedItem().toString();
-        Categoria categoria = Categoria.valueOf(categoriaSeleccionada);
-        
-        String salario = empleado.calcularSalario();
-        
-        this.jLabelSalarioEmpleado.setText(salario);
-
     }//GEN-LAST:event_jButtonCalcularSalarioMouseClicked
 
     private void jButtonGuardarEmpleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonGuardarEmpleadoMouseClicked
-        empleado.nombre = this.jTextFieldNombreEmpleado.getText();
-        empleado.apellido = this.jTextFieldApellidoEmpleado.getText();
-        empleado.antiguedad = this.jTextFieldAntiguedadEmpleado.getText();
-        
-        String categoriaSeleccionada = this.jComboBoxCategoria.getSelectedItem().toString();
-        empleado.categoria = Categoria.valueOf(categoriaSeleccionada);
-        
-        //this.listFrame.actualizarEmpleado(empleado);
-        this.dispose();
+
     }//GEN-LAST:event_jButtonGuardarEmpleadoMouseClicked
 
     private void jButtonCalcularSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCalcularSalarioActionPerformed
@@ -256,18 +226,6 @@ public class DetailFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldApellidoEmpleado;
     private javax.swing.JTextField jTextFieldNombreEmpleado;
     // End of variables declaration//GEN-END:variables
-
-    public String getIdEmpleado() {
-        return idEmpleado;
-    }
-
-    public Empleado getEmpleado() {
-        return empleado;
-    }
-
-    public ListFrame getListFrame() {
-        return listFrame;
-    }
 
     public JButton getjButtonCalcularSalario() {
         return jButtonCalcularSalario;
