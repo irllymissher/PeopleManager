@@ -17,8 +17,6 @@ import javax.swing.table.TableModel;
  * @author tomif
  */
 public class ListFrame extends javax.swing.JFrame {
-
-    private ArrayList<Empleado> empleados = new ArrayList<Empleado>();
     
     /**
      * Creates new form ListFrame
