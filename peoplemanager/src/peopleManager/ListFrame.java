@@ -248,4 +248,11 @@ public class ListFrame extends javax.swing.JFrame {
         }
         this.rellenarTablaEmpleados();
     }
+    
+    public void insertarEmpleado(Empleado empleadoParaInsertar){
+        String id = String.valueOf(empleados.size() + 1);
+        empleadoParaInsertar.objectId = id;
+        this.empleados.add(empleadoParaInsertar);
+        rellenarTablaEmpleados();
+    }
 }
