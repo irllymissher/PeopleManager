@@ -23,16 +23,16 @@ public class ListFrame extends javax.swing.JFrame {
     public ListFrame() {
         initComponents();
         
-        empleados.add("1,Augustus,Caesar,15,CTO");
-        empleados.add("2,Tiberius,Claudius,12,Manager");
-        empleados.add("3,Caligula,Germanicus,8,Backend");
-        empleados.add("4,Claudius,Nero,10,DevOps");
-        empleados.add("5,Nero,Augustus,6,Developer");
-        empleados.add("6,Vespasian,Flavius,14,TechLead");
-        empleados.add("7,Titus,Flavius,9,Backend");
-        empleados.add("8,Domitian,Augustus,11,Manager");
-        empleados.add("9,Trajan,Optimus,13,CTO");
-        empleados.add("10,Hadrian,Aelius,10,DevOps");
+        empleados.add(new Empleado("1", "Augustus", "Caesar", "15", Categoria.CTO));
+        empleados.add(new Empleado("2", "Tiberius", "Claudius", "12", Categoria.MANAGER));
+        empleados.add(new Empleado("3", "Caligula", "Germanicus", "8", Categoria.BACKEND));
+        empleados.add(new Empleado("4", "Claudius", "Nero", "10", Categoria.DEVOPS));
+        empleados.add(new Empleado("5", "Nero", "Augustus", "6", Categoria.DEVELOPER));
+        empleados.add(new Empleado("6", "Vespasian", "Flavius", "14", Categoria.TECHLEAD));
+        empleados.add(new Empleado("7", "Titus", "Flavius", "9", Categoria.BACKEND));
+        empleados.add(new Empleado("8", "Domitian", "Augustus", "11", Categoria.MANAGER));
+        empleados.add(new Empleado("9", "Trajan", "Optimus", "13", Categoria.CTO));
+        empleados.add(new Empleado("10", "Hadrian", "Aelius", "10", Categoria.DEVOPS));
         
         this.rellenarTablaEmpleados();
     }
@@ -198,42 +198,37 @@ public class ListFrame extends javax.swing.JFrame {
             tableModel.setValueAt(nombre+  " " + apellido,i, 1);
             tableModel.setValueAt(antiguedad,i, 2);
             tableModel.setValueAt(categoria,i, 3);
-            tableModel.setValueAt("",i, 4);
+            tableModel.setValueAt(calcularSalario(antiguedad, categoria),i, 4);
         }
     }
     
-    String calcularSalario(String strAntiguedad, String strCategory) {
+    String calcularSalario(String strAntiguedad, Categoria strCategory) {
 
         int antiguedad = Integer.valueOf(strAntiguedad);
 
         if (antiguedad < 5) {
             return "20000";
         }
-        
-        String cat = strCategory.toLowerCase();
-
         if (antiguedad >= 5 && antiguedad < 10) {
-            switch (cat) {
-                case "backend":
+            switch (strCategory) {
+                case BACKEND:
                     return "30000";
-                case "devops":
+                case DEVOPS:
                     return "35000";
                 default: /* TechLead */
                     return "45000";
             }
         }
-
         if (antiguedad >= 10) {
-            switch (cat) {
-                case "cto":
+            switch (strCategory) {
+                case CTO:
                     return "60000";
-                case "devops":
+                case DEVOPS:
                     return "55000";
                 default: /* Backend */
                     return "50000";
             }
         }
-
         return "0";
     }
     
