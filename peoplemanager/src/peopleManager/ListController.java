@@ -5,6 +5,7 @@
 package peopleManager;
 
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -20,6 +21,12 @@ public class ListController {
         this.vista = new ListFrame();
         this.vista.setVisible(true);
         
+        this.vista.getjTableEmpleados().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                irADetailFrame();
+            }});
+ 
         empleados.add(new Empleado("1", "Augustus", "Caesar", "15", Categoria.CTO));
         empleados.add(new Empleado("2", "Tiberius", "Claudius", "12", Categoria.MANAGER));
         empleados.add(new Empleado("3", "Caligula", "Germanicus", "8", Categoria.BACKEND));
@@ -50,6 +57,9 @@ public class ListController {
         }
     }
     
-    
-    
+    public void irADetailFrame() {
+        int row = this.vista.getjTableEmpleados().getSelectedRow();
+        DetailController detailController = new DetailController();
+        detailController.cargarEmpleado(empleados.get(row));
+    }
 }
