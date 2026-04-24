@@ -29,7 +29,7 @@ public class DetailController {
     
     public void cargarEmpleado(Empleado empleado){
         this.empleado = empleado;
-        this.vista.open();
+        
         this.vista.getjTextFieldNombreEmpleado().setText(empleado.nombre);
         this.vista.getjTextFieldApellidoEmpleado().setText(empleado.apellido);
         this.vista.getjTextFieldAntiguedadEmpleado().setText(empleado.antiguedad);
