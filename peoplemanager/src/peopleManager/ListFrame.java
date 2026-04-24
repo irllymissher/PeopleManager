@@ -15,7 +15,7 @@ import javax.swing.table.TableModel;
  */
 public class ListFrame extends javax.swing.JFrame {
 
-    private ArrayList<String> empleados = new ArrayList<String>();
+    private ArrayList<Empleado> empleados = new ArrayList<Empleado>();
     
     /**
      * Creates new form ListFrame
@@ -186,18 +186,18 @@ public class ListFrame extends javax.swing.JFrame {
         TableModel tableModel = this.jTableEmpleados.getModel();
         
         for(int i=0; i<empleados.size(); i++){
-            String empleado = empleados.get(i);
-            String[] trozo = empleado.split(",");
-            String id = trozo[0];
-            String nombre = trozo[1];
-            String apellido = trozo[2];
-            String antiguedad = trozo[3];
-            String category = trozo[4];
+            Empleado employee = empleados.get(i);
+            
+            String id = employee.objectId;
+            String nombre = employee.nombre;
+            String apellido = employee.apellido;
+            String antiguedad = employee.antiguedad;
+            Categoria categoria = employee.categoria;
             
             tableModel.setValueAt(id,i, 0);
             tableModel.setValueAt(nombre+  " " + apellido,i, 1);
             tableModel.setValueAt(antiguedad,i, 2);
-            tableModel.setValueAt(category,i, 3);
+            tableModel.setValueAt(categoria,i, 3);
             tableModel.setValueAt("",i, 4);
         }
     }
@@ -237,14 +237,12 @@ public class ListFrame extends javax.swing.JFrame {
         return "0";
     }
     
-    public void actualizarEmpleado(String empleadoActualizado){
-        String[] datosEmpleado = empleadoActualizado.split(",");
-        String id = datosEmpleado[0];
+    public void actualizarEmpleado(Empleado empleadoPorActualizar){
+        String id = empleadoPorActualizar.objectId;
         for(int i=0; i<empleados.size(); i++){
-            String empleado = empleados.get(i);
-            String[] strDatosEmpleado = empleado.split(",");
-        if(strDatosEmpleado[0].equals(id)){
-            empleados.set(i, empleadoActualizado);
+            Empleado empleado = empleados.get(i);
+        if(empleado.objectId.equalsIgnoreCase(id)){
+            empleados.set(i, empleadoPorActualizar);
             break;
             }
         }
