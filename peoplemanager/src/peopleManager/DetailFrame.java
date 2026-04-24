@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
+import peopleManager.Categoria;
 /**
  *
  * @author tomif
@@ -23,10 +23,10 @@ public class DetailFrame extends javax.swing.JFrame {
      * @param empleado
      * @param listFrame
      */
-    public DetailFrame(ArrayList<String> Categoria) {
+    public DetailFrame(ArrayList<String> categorias) {
         initComponents();
         
-        for (String categoria : Categoria){
+        for(String categoria : categorias){
             this.jComboBoxCategoria.addItem(categoria);
         }
     }
