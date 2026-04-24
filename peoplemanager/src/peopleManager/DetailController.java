@@ -18,4 +18,15 @@ public class DetailController {
         
         this.vista.open();
     }
+    
+    public void calcularSalario(){
+        
+        String antiguedad = this.vista.getjTextFieldAntiguedadEmpleado().getText();
+        String categoria = this.vista.getjComboBoxCategoria().getSelectedItem().toString();
+        
+        this.empleado.antiguedad = antiguedad;
+        this.empleado.categoria = Categoria.valueOf(categoria);
+        
+        this.vista.getjLabelSalarioEmpleado().setText(empleado.calcularSalario());
+    }
 }
