@@ -6,6 +6,10 @@
 package peopleManager;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -198,7 +202,7 @@ public class DetailFrame extends javax.swing.JFrame {
         String categoriaSeleccionada = this.jComboBoxCategoria.getSelectedItem().toString();
         empleado.categoria = Categoria.valueOf(categoriaSeleccionada);
         
-        this.listFrame.actualizarEmpleado(empleado);
+        //this.listFrame.actualizarEmpleado(empleado);
         this.dispose();
     }//GEN-LAST:event_jButtonGuardarEmpleadoMouseClicked
 
@@ -252,4 +256,62 @@ public class DetailFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldApellidoEmpleado;
     private javax.swing.JTextField jTextFieldNombreEmpleado;
     // End of variables declaration//GEN-END:variables
+
+    public String getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public ListFrame getListFrame() {
+        return listFrame;
+    }
+
+    public JButton getjButtonCalcularSalario() {
+        return jButtonCalcularSalario;
+    }
+
+    public JButton getjButtonGuardarEmpleado() {
+        return jButtonGuardarEmpleado;
+    }
+
+    public JComboBox<String> getjComboBoxCategoria() {
+        return jComboBoxCategoria;
+    }
+
+    public JLabel getjLabelAntiguedad() {
+        return jLabelAntiguedad;
+    }
+
+    public JLabel getjLabelApellido() {
+        return jLabelApellido;
+    }
+
+    public JLabel getjLabelCategoria() {
+        return jLabelCategoria;
+    }
+
+    public JLabel getjLabelNombre() {
+        return jLabelNombre;
+    }
+
+    public JLabel getjLabelSalarioEmpleado() {
+        return jLabelSalarioEmpleado;
+    }
+
+    public JTextField getjTextFieldAntiguedadEmpleado() {
+        return jTextFieldAntiguedadEmpleado;
+    }
+
+    public JTextField getjTextFieldApellidoEmpleado() {
+        return jTextFieldApellidoEmpleado;
+    }
+
+    public JTextField getjTextFieldNombreEmpleado() {
+        return jTextFieldNombreEmpleado;
+    }
+
+    
 }
