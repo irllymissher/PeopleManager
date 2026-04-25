@@ -27,6 +27,12 @@ public class DetailController {
         buttonCalculate.addActionListener((ActionEvent e) -> {
             calcularSalario();
             });
+        
+        JButton buttonSave= this.vista.getjButtonGuardarEmpleado();
+            buttonSave.addActionListener((ActionEvent e) -> {
+            save();
+            });
+
     }
     
     public void cargarEmpleado(Empleado empleado){
