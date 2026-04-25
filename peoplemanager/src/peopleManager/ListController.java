@@ -59,7 +59,7 @@ public class ListController {
     
     public void irADetailFrame() {
         int row = this.vista.getjTableEmpleados().getSelectedRow();
-        DetailController detailController = new DetailController();
+        DetailController detailController = new DetailController(this);
         detailController.cargarEmpleado(empleados.get(row));
     }
     
