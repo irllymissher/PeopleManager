@@ -62,4 +62,18 @@ public class ListController {
         DetailController detailController = new DetailController();
         detailController.cargarEmpleado(empleados.get(row));
     }
+    
+    public void updateEmployee(Empleado empleadoActualizado){
+        String idEmpleadoActualizado = empleadoActualizado.objectId;
+        
+        for (int i = 0; i < empleados.size(); i++) {
+            Empleado empleadoSinActualizar = empleados.get(i);
+            if (empleadoSinActualizar.objectId.equalsIgnoreCase(idEmpleadoActualizado))
+            {
+                empleados.set(i, empleadoActualizado);
+                break;
+            }
+        }
+        this.rellenarTablaEmpleados();
+    }
 }
