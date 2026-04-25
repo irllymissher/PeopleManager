@@ -50,4 +50,17 @@ public class DetailController {
         
         this.vista.getjLabelSalarioEmpleado().setText(empleado.calcularSalario());
     }
+    
+    public void save(){
+        String objectID = this.empleado.objectId;
+        String nombre = this.vista.getjTextFieldNombreEmpleado().getText();
+        String apellido = this.vista.getjTextFieldApellidoEmpleado().getText();
+        String antiguedad = this.vista.getjTextFieldAntiguedadEmpleado().getText();
+        Categoria categoria = Categoria.valueOf(this.vista.getjComboBoxCategoria().getSelectedItem().toString());
+        
+        Empleado empleadoActualizar = new Empleado(objectID, nombre, apellido, antiguedad, categoria);
+        
+        this.listController.updateEmployee(empleadoActualizar);
+        this.vista.close();
+    }
 }
