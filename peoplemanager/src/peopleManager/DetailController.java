@@ -11,8 +11,10 @@ import javax.swing.JButton;
 public class DetailController {
     private DetailFrame vista;
     private Empleado empleado;
+    private ListController listController;
 
-    public DetailController() {
+    public DetailController(ListController listController) {
+        this.listController = listController;
         
         ArrayList<String> categorias = new ArrayList<String>();
         for(Categoria cat : Categoria.values()){
