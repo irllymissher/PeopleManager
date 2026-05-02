@@ -11,6 +11,16 @@ public class ListPresenter {
     
     public ListPresenter(IListView view){
         this.view = view;
+        
+        this.view.cargarAccionSeleccionada( ()->{
+            String id = this.view.obtenerIdEmpleado();
+            Empleado empleado = null;
+            for (Empleado empleado1 : empleados) {
+                if(empleado1.objectId.equals(id))
+                    empleado = empleado1;
+            }
+            this.detailPresenter.cargarEmpleadoE(empleado);
+        });
     }
     
     public void cargarDatos(ArrayList<Empleado> empleados){
