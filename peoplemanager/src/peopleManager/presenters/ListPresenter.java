@@ -15,11 +15,14 @@ public class ListPresenter {
         this.view.cargarAccionSeleccionada( ()->{
             String id = this.view.obtenerIdEmpleado();
             Empleado empleado = null;
-            for (Empleado empleado1 : empleados) {
-                if(empleado1.objectId.equals(id))
+            for (Empleado empleado1 : this.empleados) {
+                if(empleado1.objectId.equals(id)){
                     empleado = empleado1;
+                    break;
+                }
             }
-            this.detailPresenter.cargarEmpleadoE(empleado);
+            if (this.detailPresenter != null)
+                this.detailPresenter.cargarEmpleadoE(empleado);
         });
     }
     
