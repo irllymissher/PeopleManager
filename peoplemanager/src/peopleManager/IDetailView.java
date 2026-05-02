@@ -3,13 +3,13 @@ package peopleManager;
 import java.util.ArrayList;
 
 public interface IDetailView {
-    void abrir();
-    void cerrar();
-    void mostrarCategorias(ArrayList<String> categorias);
+    void abrirPantalla();
+    void cerrarPantalla();
+    void mostrarListaDeCategorias(ArrayList<String> nombresDeCategorias);
     
     void cargarAccionCalcular(Runnable accionCalcular);
     
-    Empleado obtenerEmpleado();
-    void mostrarDatosEmpleado(Empleado empleado);
-    void mostrarSalario(String salario); /* Si no actualizarSalario */
+    Empleado crearEmpleadoDesdeFormulario();
+    void mostrarDetallesDelEmpleadoSeleccionado(Empleado empleadoSeleccionado);
+    void mostrarSalarioCalculado(String salario); /* Si no actualizarSalario */
 }

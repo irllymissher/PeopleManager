@@ -21,15 +21,15 @@ public class DetailPresenter {
         for (Categoria categoriaActual : Categoria.values()) {
             nombreDeCategorias.add(categoriaActual.name());
         }
-        this.vistaPantallaDetalle.mostrarCategorias(nombreDeCategorias);
+        this.vistaPantallaDetalle.mostrarListaDeCategorias(nombreDeCategorias);
         
-        this.vistaPantallaDetalle.mostrarDatosEmpleado(empleadoSeleccionado); 
-        this.vistaPantallaDetalle.abrir();
+        this.vistaPantallaDetalle.mostrarDetallesDelEmpleadoSeleccionado(empleadoSeleccionado); 
+        this.vistaPantallaDetalle.abrirPantalla();
     }
     
     public void calcularSalarioEmpleado(){
-        Empleado empleadoEnFormulario = this.vistaPantallaDetalle.obtenerEmpleado();
+        Empleado empleadoEnFormulario = this.vistaPantallaDetalle.crearEmpleadoDesdeFormulario();
         String salarioCalculado = empleadoEnFormulario.calcularSalario();
-        this.vistaPantallaDetalle.mostrarSalario(salarioCalculado);
+        this.vistaPantallaDetalle.mostrarSalarioCalculado(salarioCalculado);
     }
 }

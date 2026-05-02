@@ -130,41 +130,41 @@ public class ListFrame extends javax.swing.JFrame implements IListView{
      * 
      * JTable NO guarda datos, DefaultTableModel SI guarda datos y TableModel devuelve
      * el modelo actual de la tabla
-     * @param empleados 
+     * @param listaDeEmpleados 
      */
     @Override
-    public void cargarFilaEmpleados(ArrayList<Empleado> empleados){
-        DefaultTableModel modelTable = (DefaultTableModel)jTableEmpleados.getModel();
-        modelTable.setRowCount(0);
-        empleados.forEach((empleado1) -> {modelTable.addRow(new Object[]{
-                empleado1.getObjectId(),
-                empleado1.getNombre(),
-                empleado1.getApellido(),
-                empleado1.getCategoria(),
-                empleado1.calcularSalario()
+    public void cargarEmpleadoEnTabla(ArrayList<Empleado> listaDeEmpleados){
+        DefaultTableModel modeloTabla = (DefaultTableModel)jTableEmpleados.getModel();
+        modeloTabla.setRowCount(0);
+        listaDeEmpleados.forEach((empleadoActual) -> {modeloTabla.addRow(new Object[]{
+                empleadoActual.getObjectId(),
+                empleadoActual.getNombre(),
+                empleadoActual.getApellido(),
+                empleadoActual.getCategoria(),
+                empleadoActual.calcularSalario()
             });
         });
     }
 
     @Override
-    public String obtenerIdEmpleado() {
-        int fila = this.jTableEmpleados.getSelectedRow();
-        TableModel modelTable = this.jTableEmpleados.getModel();
-        return modelTable.getValueAt(fila, 0).toString();
+    public String obtenerIdDelEmpleadoSeleccionado() {
+        int filaSeleccionada = this.jTableEmpleados.getSelectedRow();
+        TableModel modeloTabla = this.jTableEmpleados.getModel();
+        return modeloTabla.getValueAt(filaSeleccionada, 0).toString();
     }
 
     @Override
-    public void cargarAccionSeleccionada(Runnable selectedAction) {
+    public void asignarAccionAlSeleccionarEmpleado(Runnable accionSeleccionar) {
         this.jTableEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
-                selectedAction.run();
+                accionSeleccionar.run();
             }
         });
     }
 
     @Override
-    public void cargarNuevaAccion(Runnable newAction) {
+    public void asignarAccionParaNuevoEmpleado(Runnable newAction) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

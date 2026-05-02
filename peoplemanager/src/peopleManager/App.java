@@ -27,7 +27,7 @@ public class App {
                 ListFrame listView = new ListFrame();
                 ListPresenter listPresenter = new ListPresenter(listView);
                 
-                listPresenter.establecerDetailPresenter(detailPresenter);
+                listPresenter.establecerPresentadorPantallaDetalle(detailPresenter);
                 listPresenter.cargarDatos(empleados);
             }
         });

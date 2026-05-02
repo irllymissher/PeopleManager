@@ -12,8 +12,8 @@ public class ListPresenter {
     public ListPresenter(IListView vistaListaEmpleados){
         this.vistaListaEmpleados = vistaListaEmpleados;
         
-        this.vistaListaEmpleados.cargarAccionSeleccionada( ()->{
-            String idSeleccionado = this.vistaListaEmpleados.obtenerIdEmpleado();
+        this.vistaListaEmpleados.asignarAccionAlSeleccionarEmpleado( ()->{
+            String idSeleccionado = this.vistaListaEmpleados.obtenerIdDelEmpleadoSeleccionado();
             Empleado empleadoEncontrado = null;
             for (Empleado empleadoActual : this.registroDeEmpleados) {
                 if(empleadoActual.objectId.equals(idSeleccionado)){
@@ -33,7 +33,7 @@ public class ListPresenter {
     }
     
     public void mostrarEmpleados(){
-        this.vistaListaEmpleados.cargarFilaEmpleados(this.registroDeEmpleados);
+        this.vistaListaEmpleados.cargarEmpleadoEnTabla(this.registroDeEmpleados);
     }
     
     public void actualizarEmpleado(Empleado empleadoActualizado){

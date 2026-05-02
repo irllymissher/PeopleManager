@@ -9,8 +9,8 @@ import java.util.ArrayList;
 */
 public interface IListView {
     void abrirLista();
-    void cargarFilaEmpleados(ArrayList<Empleado> empleado);
-    String obtenerIdEmpleado();
-    void cargarAccionSeleccionada(Runnable selectedAction);
-    void cargarNuevaAccion(Runnable newAction);
+    void cargarEmpleadoEnTabla(ArrayList<Empleado> listaDeEmpleados);
+    String obtenerIdDelEmpleadoSeleccionado();
+    void asignarAccionAlSeleccionarEmpleado(Runnable accionSeleccionar);
+    void asignarAccionParaNuevoEmpleado(Runnable accionNuevoEmpleado);
 }

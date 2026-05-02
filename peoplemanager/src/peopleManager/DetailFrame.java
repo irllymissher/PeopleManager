@@ -222,49 +222,49 @@ public class DetailFrame extends javax.swing.JFrame implements IDetailView{
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void abrir() {setVisible(true);}
+    public void abrirPantalla() {setVisible(true);}
 
     @Override
-    public void cerrar() { setVisible(false);}
+    public void cerrarPantalla() { setVisible(false);}
 
     @Override
-    public void mostrarCategorias(ArrayList<String> categorias) {
-        for(String categoria : categorias){
-            this.jComboBoxCategoria.addItem(categoria);
+    public void mostrarListaDeCategorias(ArrayList<String> categorias) {
+        for(String nombreCategoria : categorias){
+            this.jComboBoxCategoria.addItem(nombreCategoria);
         }
     }
 
     @Override
     public void cargarAccionCalcular(Runnable accionCalcular) {
-        this.jButtonCalcularSalario.addActionListener(e -> {
+        this.jButtonCalcularSalario.addActionListener(eventoBoton -> {
             accionCalcular.run();
         });
     }
     
 
     @Override
-    public Empleado obtenerEmpleado(){
-        String id = this.id;
-        String categoria = this.jComboBoxCategoria.getSelectedItem().toString();
-        Categoria cat = Categoria.valueOf(categoria);
-        String nombre = this.jTextFieldNombreEmpleado.getText();
-        String apellido = this.jTextFieldApellidoEmpleado.getText();
-        String antiguedad = this.jTextFieldAntiguedadEmpleado.getText();
+    public Empleado crearEmpleadoDesdeFormulario(){
+        String idActual = this.id;
+        String categoriaSeleccionada = this.jComboBoxCategoria.getSelectedItem().toString();
+        Categoria categoriaEnum = Categoria.valueOf(categoriaSeleccionada);
+        String nombreIngresado = this.jTextFieldNombreEmpleado.getText();
+        String apellidoIngresado = this.jTextFieldApellidoEmpleado.getText();
+        String antiguedadIngresada = this.jTextFieldAntiguedadEmpleado.getText();
         
-        return new Empleado(id, nombre, apellido, antiguedad, cat);
+        return new Empleado(idActual, nombreIngresado, apellidoIngresado, antiguedadIngresada, categoriaEnum);
     }
 
     @Override
-    public void mostrarDatosEmpleado(Empleado empleado) {
-        this.id = empleado.objectId;
-        this.jComboBoxCategoria.setSelectedItem(empleado.categoria);
-        this.jTextFieldNombreEmpleado.setText(empleado.nombre);
-        this.jTextFieldApellidoEmpleado.setText(empleado.apellido);
-        this.jTextFieldAntiguedadEmpleado.setText(empleado.antiguedad);
+    public void mostrarDetallesDelEmpleadoSeleccionado(Empleado empleadoSeleccionado) {
+        this.id = empleadoSeleccionado.objectId;
+        this.jComboBoxCategoria.setSelectedItem(empleadoSeleccionado.categorias);
+        this.jTextFieldNombreEmpleado.setText(empleadoSeleccionado.nombre);
+        this.jTextFieldApellidoEmpleado.setText(empleadoSeleccionado.apellido);
+        this.jTextFieldAntiguedadEmpleado.setText(empleadoSeleccionado.antiguedad);
     }
 
     @Override
-    public void mostrarSalario(String salario) {
-        this.jLabelSalarioEmpleado.setText(salario);
+    public void mostrarSalarioCalculado(String salarioResultante) {
+        this.jLabelSalarioEmpleado.setText(salarioResultante);
     }
 }
