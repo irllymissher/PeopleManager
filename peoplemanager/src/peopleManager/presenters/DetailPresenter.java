@@ -6,30 +6,30 @@ import peopleManager.Empleado;
 import peopleManager.IDetailView;
 
 public class DetailPresenter {
-    private IDetailView vista;
+    private IDetailView vistaPantallaDetalle;
     
-    public DetailPresenter(IDetailView view){
-        this.vista = view;
+    public DetailPresenter(IDetailView vistaPantallaDetalle){
+        this.vistaPantallaDetalle = vistaPantallaDetalle;
         
-        this.vista.cargarAccionCalcular(() -> {
+        this.vistaPantallaDetalle.cargarAccionCalcular(() -> {
             this.calcularSalarioEmpleado();
         });
     }
     
-    public void cargarEmpleadoE(Empleado empleado){
-        ArrayList<String> categorias = new ArrayList<>();
-        for (Categoria cat : Categoria.values()) {
-            categorias.add(cat.name());
+    public void mostrarDetallesDelEmpleado(Empleado empleadoSeleccionado){
+        ArrayList<String> nombreDeCategorias = new ArrayList<>();
+        for (Categoria categoriaActual : Categoria.values()) {
+            nombreDeCategorias.add(categoriaActual.name());
         }
-        this.vista.mostrarCategorias(categorias);
+        this.vistaPantallaDetalle.mostrarCategorias(nombreDeCategorias);
         
-        this.vista.mostrarDatosEmpleado(empleado); 
-        this.vista.abrir();
+        this.vistaPantallaDetalle.mostrarDatosEmpleado(empleadoSeleccionado); 
+        this.vistaPantallaDetalle.abrir();
     }
     
     public void calcularSalarioEmpleado(){
-        Empleado empleado = this.vista.obtenerEmpleado();
-        String salarioCalculado = empleado.calcularSalario();
-        this.vista.mostrarSalario(salarioCalculado);
+        Empleado empleadoEnFormulario = this.vistaPantallaDetalle.obtenerEmpleado();
+        String salarioCalculado = empleadoEnFormulario.calcularSalario();
+        this.vistaPantallaDetalle.mostrarSalario(salarioCalculado);
     }
 }
