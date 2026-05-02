@@ -13,13 +13,15 @@ import javax.swing.table.TableModel;
  *
  * @author alumno
  */
+
+/*
 public class ListController {
     private ListFrame vista;
     private ArrayList<Empleado> empleados = new ArrayList<Empleado>();
 
     public ListController() {
-        this.vista = new ListFrame();
-        this.vista.setVisible(true);
+        // this.vista = new ListFrame();
+        // this.vista.setVisible(true);
         
         this.vista.getjTableEmpleados().addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
@@ -39,6 +41,7 @@ public class ListController {
         empleados.add(new Empleado("10", "Hadrian", "Aelius", "10", Categoria.DEVOPS));
         
         this.rellenarTablaEmpleados();
+        this.vista.cargarFilaEmpleados(empleados);
     }
     
     private void rellenarTablaEmpleados(){
@@ -77,3 +80,4 @@ public class ListController {
         this.rellenarTablaEmpleados();
     }
 }
+*/
