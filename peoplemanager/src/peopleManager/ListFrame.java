@@ -118,12 +118,7 @@ public class ListFrame extends javax.swing.JFrame implements IListView{
         }
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run(){
-                
-            }
-        });
+        java.awt.EventQueue.invokeLater(new Runnable() {public void run(){}});
     }
 
     @Override
