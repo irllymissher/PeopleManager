@@ -12,7 +12,7 @@ public class ListPresenter {
         this.view = view;
     }
     
-    private void cargarDatos(ArrayList<Empleado> empleados){
+    public void cargarDatos(ArrayList<Empleado> empleados){
         this.empleados = empleados;
         this.mostrarEmpleados();
         this.view.abrirLista();
