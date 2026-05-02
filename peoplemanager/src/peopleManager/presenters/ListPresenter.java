@@ -5,43 +5,43 @@ import peopleManager.Empleado;
 import peopleManager.IListView;
 
 public class ListPresenter {
-    private IListView view;
-    private ArrayList<Empleado> empleados;
-    private DetailPresenter detailPresenter;
+    private IListView vistaListaEmpleados;
+    private ArrayList<Empleado> registroDeEmpleados;
+    private DetailPresenter presentadorPantallaDetalle;
     
-    public ListPresenter(IListView view){
-        this.view = view;
+    public ListPresenter(IListView vistaListaEmpleados){
+        this.vistaListaEmpleados = vistaListaEmpleados;
         
-        this.view.cargarAccionSeleccionada( ()->{
-            String id = this.view.obtenerIdEmpleado();
-            Empleado empleado = null;
-            for (Empleado empleado1 : this.empleados) {
-                if(empleado1.objectId.equals(id)){
-                    empleado = empleado1;
+        this.vistaListaEmpleados.cargarAccionSeleccionada( ()->{
+            String idSeleccionado = this.vistaListaEmpleados.obtenerIdEmpleado();
+            Empleado empleadoEncontrado = null;
+            for (Empleado empleadoActual : this.registroDeEmpleados) {
+                if(empleadoActual.objectId.equals(idSeleccionado)){
+                    empleadoEncontrado = empleadoActual;
                     break;
                 }
             }
-            if (this.detailPresenter != null)
-                this.detailPresenter.cargarEmpleadoE(empleado);
+            if (this.presentadorPantallaDetalle != null)
+                this.presentadorPantallaDetalle.mostrarDetallesDelEmpleado(empleadoEncontrado);
         });
     }
     
-    public void cargarDatos(ArrayList<Empleado> empleados){
-        this.empleados = empleados;
+    public void cargarDatos(ArrayList<Empleado> nuevosEmpleados){
+        this.registroDeEmpleados = nuevosEmpleados;
         this.mostrarEmpleados();
-        this.view.abrirLista();
+        this.vistaListaEmpleados.abrirLista();
     }
     
     public void mostrarEmpleados(){
-        this.view.cargarFilaEmpleados(this.empleados);
+        this.vistaListaEmpleados.cargarFilaEmpleados(this.registroDeEmpleados);
     }
     
     public void actualizarEmpleado(Empleado empleadoActualizado){
-        String id = empleadoActualizado.objectId;
-        for (int i = 0; i < empleados.size(); i++) {
-            Empleado empleado = empleados.get(i);
-            if (empleado.equals(id)){
-                empleados.set(i, empleadoActualizado);
+        String idBuscado = empleadoActualizado.objectId;
+        for (int i = 0; i < registroDeEmpleados.size(); i++) {
+            Empleado empleadoActual = registroDeEmpleados.get(i);
+            if (empleadoActual.objectId.equals(idBuscado)){
+                this.registroDeEmpleados.set(i, empleadoActualizado);
                 break;
             }
         }
@@ -52,7 +52,7 @@ public class ListPresenter {
         return;
     }
     
-    public void establecerDetailPresenter(DetailPresenter detailPresenter){
-        this.detailPresenter = detailPresenter;
+    public void establecerPresentadorPantallaDetalle(DetailPresenter presentadorPantallaDetalle){
+        this.presentadorPantallaDetalle = presentadorPantallaDetalle;
     }
 }
