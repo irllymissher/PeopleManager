@@ -7,6 +7,7 @@ import peopleManager.IListView;
 public class ListPresenter {
     private IListView view;
     private ArrayList<Empleado> empleados;
+    private DetailPresenter detailPresenter;
     
     public ListPresenter(IListView view){
         this.view = view;
@@ -38,4 +39,7 @@ public class ListPresenter {
         return;
     }
     
+    public void establecerDetailPresenter(DetailPresenter detailPresenter){
+        this.detailPresenter = detailPresenter;
+    }
 }
