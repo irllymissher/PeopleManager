@@ -6,27 +6,15 @@
 package peopleManager;
 
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-/**
- *
- * @author tomif
- */
-public class ListFrame extends javax.swing.JFrame {
+public class ListFrame extends javax.swing.JFrame implements IListView{
     
-    /**
-     * Creates new form ListFrame
-     */
     public ListFrame() {
         initComponents();
     }
     
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -138,12 +126,51 @@ public class ListFrame extends javax.swing.JFrame {
         });
     }
 
-    public JScrollPane getjScrollPane1() {
-        return jScrollPane1;
+    @Override
+    public void abrirLista() { setVisible(true); }
+
+    /**
+     * TableModel -> Es una intefaz genérica,  no tiene metodos: addRow(), setRowCount()
+     * Casteamos a DefaultTableModel para usar sus metodos.
+     * 
+     * JTable NO guarda datos, DefaultTableModel SI guarda datos y TableModel devuelve
+     * el modelo actual de la tabla
+     * @param empleados 
+     */
+    @Override
+    public void cargarFilaEmpleados(ArrayList<Empleado> empleados){
+        DefaultTableModel modelTable = (DefaultTableModel)jTableEmpleados.getModel();
+        modelTable.setRowCount(0);
+        empleados.forEach((empleado1) -> {modelTable.addRow(new Object[]{
+                empleado1.getObjectId(),
+                empleado1.getNombre(),
+                empleado1.getApellido(),
+                empleado1.getCategoria(),
+                empleado1.calcularSalario()
+            });
+        });
     }
 
-    public JTable getjTableEmpleados() {
-        return jTableEmpleados;
+    @Override
+    public String obtenerIdEmpleado() {
+        int fila = this.jTableEmpleados.getSelectedRow();
+        TableModel modelTable = this.jTableEmpleados.getModel();
+        return modelTable.getValueAt(fila, 0).toString();
+    }
+
+    @Override
+    public void cargarAccionSeleccionada(Runnable selectedAction) {
+        this.jTableEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e) {
+                selectedAction.run();
+            }
+        });
+    }
+
+    @Override
+    public void cargarNuevaAccion(Runnable newAction) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
