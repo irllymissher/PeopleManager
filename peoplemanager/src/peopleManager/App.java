@@ -6,6 +6,7 @@ package peopleManager;
 
 import java.util.ArrayList;
 import peopleManager.Categoria;
+import peopleManager.presenters.DetailPresenter;
 import peopleManager.presenters.ListPresenter;
 
 /**
@@ -19,6 +20,9 @@ public class App {
                 ArrayList<Empleado> empleados = new ArrayList<Empleado>();
                 empleados.add(new Empleado("1","Bob","Smith","5",Categoria.CTO));
                 empleados.add(new Empleado("2","John","Doe","10",Categoria.MANAGER));
+                
+                DetailFrame detailView = new DetailFrame();
+                DetailPresenter detailPresenter = new DetailPresenter(detailView);
                 
                 ListFrame listView = new ListFrame();
                 ListPresenter listPresenter = new ListPresenter(listView);
