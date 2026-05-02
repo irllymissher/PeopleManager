@@ -17,18 +17,18 @@ public class App {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                ArrayList<Empleado> empleados = new ArrayList<Empleado>();
-                empleados.add(new Empleado("1","Bob","Smith","5",Categoria.CTO));
-                empleados.add(new Empleado("2","John","Doe","10",Categoria.MANAGER));
+                ArrayList<Empleado> listaInicialEmpleados = new ArrayList<Empleado>();
+                listaInicialEmpleados.add(new Empleado("1","Bob","Smith","5",Categoria.CTO));
+                listaInicialEmpleados.add(new Empleado("2","John","Doe","10",Categoria.MANAGER));
                 
-                DetailFrame detailView = new DetailFrame();
-                DetailPresenter detailPresenter = new DetailPresenter(detailView);
+                DetailFrame vistaPantallaDetalle = new DetailFrame();
+                DetailPresenter presentadorPantallaDetalle = new DetailPresenter(vistaPantallaDetalle);
                 
-                ListFrame listView = new ListFrame();
-                ListPresenter listPresenter = new ListPresenter(listView);
+                ListFrame vistaListaEmpleados = new ListFrame();
+                ListPresenter presentadorListaEmpleados = new ListPresenter(vistaListaEmpleados);
                 
-                listPresenter.establecerPresentadorPantallaDetalle(detailPresenter);
-                listPresenter.cargarDatos(empleados);
+                presentadorListaEmpleados.establecerPresentadorPantallaDetalle(presentadorPantallaDetalle);
+                presentadorListaEmpleados.cargarDatos(listaInicialEmpleados);
             }
         });
     }
