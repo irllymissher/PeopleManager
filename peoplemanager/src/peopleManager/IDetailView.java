@@ -11,6 +11,6 @@ public interface IDetailView {
     void cargarAccionGuardar(Runnable accionGuardar);
     
     Empleado obtenerEmpleado();
-    void mostrarDatosEmpleado(Empleado empleaod);
+    void mostrarDatosEmpleado(Empleado empleado);
     void mostrarSalario(String salario); /* Si no actualizarSalario */
 }
