@@ -5,6 +5,7 @@
  */
 package peopleManager;
 
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -16,19 +17,12 @@ import peopleManager.Categoria;
  *
  * @author tomif
  */
-public class DetailFrame extends javax.swing.JFrame {
+public class DetailFrame extends javax.swing.JFrame implements IDetailView{
+
+   private String id;
     
-    /**
-     * Creates new form DetailFrame
-     * @param empleado
-     * @param listFrame
-     */
-    public DetailFrame(ArrayList<String> categorias) {
+    public DetailFrame() {
         initComponents();
-        
-        for(String categoria : categorias){
-            this.jComboBoxCategoria.addItem(categoria);
-        }
     }
 
     /**
@@ -227,56 +221,50 @@ public class DetailFrame extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldNombreEmpleado;
     // End of variables declaration//GEN-END:variables
 
-    public JButton getjButtonCalcularSalario() {
-        return jButtonCalcularSalario;
+    @Override
+    public void abrir() {setVisible(true);}
+
+    @Override
+    public void cerrar() { setVisible(false);}
+
+    @Override
+    public void mostrarCategorias(ArrayList<String> categorias) {
+        for(String categoria : categorias){
+            this.jComboBoxCategoria.addItem(categoria);
+        }
     }
 
-    public JButton getjButtonGuardarEmpleado() {
-        return jButtonGuardarEmpleado;
-    }
-
-    public JComboBox<String> getjComboBoxCategoria() {
-        return jComboBoxCategoria;
-    }
-
-    public JLabel getjLabelAntiguedad() {
-        return jLabelAntiguedad;
-    }
-
-    public JLabel getjLabelApellido() {
-        return jLabelApellido;
-    }
-
-    public JLabel getjLabelCategoria() {
-        return jLabelCategoria;
-    }
-
-    public JLabel getjLabelNombre() {
-        return jLabelNombre;
-    }
-
-    public JLabel getjLabelSalarioEmpleado() {
-        return jLabelSalarioEmpleado;
-    }
-
-    public JTextField getjTextFieldAntiguedadEmpleado() {
-        return jTextFieldAntiguedadEmpleado;
-    }
-
-    public JTextField getjTextFieldApellidoEmpleado() {
-        return jTextFieldApellidoEmpleado;
-    }
-
-    public JTextField getjTextFieldNombreEmpleado() {
-        return jTextFieldNombreEmpleado;
+    @Override
+    public void cargarAccionCalcular(Runnable accionCalcular) {
+        this.jButtonCalcularSalario.addActionListener(e -> {
+            accionCalcular.run();
+        });
     }
     
-    public void open(){
-        this.setVisible(true);
+
+    @Override
+    public Empleado obtenerEmpleado(){
+        String id = this.id;
+        String categoria = this.jComboBoxCategoria.getSelectedItem().toString();
+        Categoria cat = Categoria.valueOf(categoria);
+        String nombre = this.jTextFieldNombreEmpleado.getText();
+        String apellido = this.jTextFieldApellidoEmpleado.getText();
+        String antiguedad = this.jTextFieldAntiguedadEmpleado.getText();
+        
+        return new Empleado(id, nombre, apellido, antiguedad, cat);
     }
-    
-    public void close(){
-        this.setVisible(false);
+
+    @Override
+    public void mostrarDatosEmpleado(Empleado empleado) {
+        this.id = empleado.objectId;
+        this.jComboBoxCategoria.setSelectedItem(empleado.categoria);
+        this.jTextFieldNombreEmpleado.setText(empleado.nombre);
+        this.jTextFieldApellidoEmpleado.setText(empleado.apellido);
+        this.jTextFieldAntiguedadEmpleado.setText(empleado.antiguedad);
     }
-    
+
+    @Override
+    public void mostrarSalario(String salario) {
+        this.jLabelSalarioEmpleado.setText(salario);
+    }
 }
