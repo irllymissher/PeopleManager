@@ -23,7 +23,7 @@ public class Empleado {
         this.categoria = categoria;
     }
     
-    String calcularSalario() {
+    public String calcularSalario() {
 
         int s = Integer.valueOf(antiguedad);
 
