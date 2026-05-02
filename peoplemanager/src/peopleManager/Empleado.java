@@ -13,26 +13,26 @@ public class Empleado {
     public String nombre;
     public String apellido;
     public String antiguedad;
-    public Categoria categoria;
+    public Categoria categorias;
 
     public Empleado(String objectId, String nombre, String apellido, String antiguedad, Categoria categoria) {
         this.objectId = objectId;
         this.nombre = nombre;
         this.apellido = apellido;
         this.antiguedad = antiguedad;
-        this.categoria = categoria;
+        this.categorias = categoria;
     }
     
     public String calcularSalario() {
 
-        int s = Integer.valueOf(antiguedad);
+        int aniosDeAntiguedad = Integer.valueOf(antiguedad);
 
-        if (s < 5) {
+        if (aniosDeAntiguedad < 5) {
             return "20000";
         }
 
-        if (s >= 5 && s < 10) {
-            switch (categoria) {
+        if (aniosDeAntiguedad >= 5 && aniosDeAntiguedad < 10) {
+            switch (categorias) {
                 case BACKEND:
                     return "30000";
                 case DEVOPS:
@@ -42,8 +42,8 @@ public class Empleado {
             }
         }
 
-        if (s >= 10) {
-            switch (categoria) {
+        if (aniosDeAntiguedad >= 10) {
+            switch (categorias) {
                 case CTO:
                     return "60000";
                 case DEVOPS:
@@ -57,7 +57,7 @@ public class Empleado {
     }
     
     public String nameDescription(){
-        return nombre + apellido;
+        return this.nombre + this.apellido;
     }
 
     public String getObjectId() {
@@ -77,6 +77,6 @@ public class Empleado {
     }
 
     public Categoria getCategoria() {
-        return categoria;
+        return categorias;
     }
 }
