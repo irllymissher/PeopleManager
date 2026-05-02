@@ -11,5 +11,5 @@ public interface IDetailView {
     
     Empleado crearEmpleadoDesdeFormulario();
     void mostrarDetallesDelEmpleadoSeleccionado(Empleado empleadoSeleccionado);
-    void mostrarSalarioCalculado(String salario); /* Si no actualizarSalario */
+    void mostrarSalarioCalculado(String salarioResultante); /* Si no actualizarSalario */
 }
