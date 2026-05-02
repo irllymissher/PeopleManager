@@ -14,11 +14,11 @@ public class ListPresenter {
     
     private void cargarDatos(ArrayList<Empleado> empleados){
         this.empleados = empleados;
-        this.actualizarVista();
+        this.mostrarEmpleados();
         this.view.abrirLista();
     }
     
-    public void actualizarVista(){
+    public void mostrarEmpleados(){
         this.view.cargarFilaEmpleados(this.empleados);
     }
     
@@ -31,7 +31,7 @@ public class ListPresenter {
                 break;
             }
         }
-        this.actualizarVista();
+        this.mostrarEmpleados();
     }
     
     public void insertarEmpleado(Empleado empleado){
