@@ -59,4 +59,24 @@ public class Empleado {
     public String nameDescription(){
         return nombre + apellido;
     }
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public String getAntiguedad() {
+        return antiguedad;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
 }
