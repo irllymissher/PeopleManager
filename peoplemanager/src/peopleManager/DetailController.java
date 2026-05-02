@@ -66,7 +66,7 @@ public class DetailController {
         
         Empleado empleadoActualizar = new Empleado(objectID, nombre, apellido, antiguedad, categoria);
         
-        this.listController.updateEmployee(empleadoActualizar);
+//        this.listController.updateEmployee(empleadoActualizar);
         this.vista.close();
     }
 }
