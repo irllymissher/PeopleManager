@@ -7,13 +7,17 @@ import peopleManager.IDetailView;
 
 public class DetailPresenter {
     private IDetailView vistaPantallaDetalle;
-    private ListPresenter vistaPantallaEmpleados;
+    private ListPresenter presentadorPantallaEmpleados;
     
     public DetailPresenter(IDetailView vistaPantallaDetalle){
         this.vistaPantallaDetalle = vistaPantallaDetalle;
         
         this.vistaPantallaDetalle.cargarAccionCalcular(() -> {
             this.calcularSalarioEmpleado();
+        });
+        
+        this.vistaPantallaDetalle.cargarAccionGuardar(() -> {
+            this.guardarEmpleado();
         });
     }
     
@@ -37,10 +41,10 @@ public class DetailPresenter {
     public void guardarEmpleado(){
         Empleado empleadoAGuardar = this.vistaPantallaDetalle.crearEmpleadoDesdeFormulario();
         this.vistaPantallaDetalle.cerrarPantalla();
-        this.vistaPantallaEmpleados.actualizarEmpleado(empleadoAGuardar);
+        this.presentadorPantallaEmpleados.actualizarEmpleado(empleadoAGuardar);
     }
     
-    public void conectarPantallaDetallesConLista(ListPresenter vistaPantallaEmpleados){
-        this.vistaPantallaEmpleados = vistaPantallaEmpleados;
+    public void conectarPantallaDetallesConLista(ListPresenter presentadorPantallaEmpleados){
+        this.presentadorPantallaEmpleados = presentadorPantallaEmpleados;
     }
 }

@@ -8,6 +8,7 @@ public interface IDetailView {
     void mostrarListaDeCategorias(ArrayList<String> nombresDeCategorias);
     
     void cargarAccionCalcular(Runnable accionCalcular);
+    void cargarAccionGuardar(Runnable accionGuardar);
     
     Empleado crearEmpleadoDesdeFormulario();
     void mostrarDetallesDelEmpleadoSeleccionado(Empleado empleadoSeleccionado);

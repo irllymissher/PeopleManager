@@ -241,6 +241,13 @@ public class DetailFrame extends javax.swing.JFrame implements IDetailView{
         });
     }
     
+    @Override
+    public void cargarAccionGuardar (Runnable accionGuardar) {
+        this.jButtonGuardarEmpleado.addActionListener(eventoBoton -> {
+            accionGuardar.run();
+        });
+    }
+    
 
     @Override
     public Empleado crearEmpleadoDesdeFormulario(){
