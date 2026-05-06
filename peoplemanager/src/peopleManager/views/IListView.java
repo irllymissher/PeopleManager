@@ -14,4 +14,5 @@ public interface IListView {
     String obtenerIdDelEmpleadoSeleccionado();
     void asignarAccionAlSeleccionarEmpleado(Runnable accionSeleccionar);
     void asignarAccionParaNuevoEmpleado(Runnable accionNuevoEmpleado);
+    void asignarFilaDeEmpleado(ArrayList<FilaEmpleado> filaDeEmpleados);
 }
