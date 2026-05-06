@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import peopleManager.models.Categoria;
 import peopleManager.presenters.DetailPresenter;
 import peopleManager.presenters.ListPresenter;
+import peopleManager.presenters.PresentManager;
 
 /**
  *
@@ -28,17 +29,13 @@ public class App {
                 listaInicialEmpleados.add(new Empleado("3","Bernardo","Benavides","7",Categoria.DEVELOPER));
                 listaInicialEmpleados.add(new Empleado("4","Beatriz","Barragán","3",Categoria.DEVELOPER));
                 
-                DetailFrame vistaPantallaDetalle = new DetailFrame();
-                DetailPresenter presentadorPantallaDetalle = new DetailPresenter(vistaPantallaDetalle);
+                ListFrame pantallaRegistroDeEmpleados = new ListFrame();
+                DetailFrame pantallaDetallesDeEmpleado = new DetailFrame();
                 
+                PresentManager.listPresenter = new ListPresenter(pantallaRegistroDeEmpleados);
+                PresentManager.detailPresenter = new DetailPresenter(pantallaDetallesDeEmpleado);
                 
-                ListFrame vistaListaEmpleados = new ListFrame();
-                ListPresenter presentadorListaEmpleados = new ListPresenter(vistaListaEmpleados);
-                
-                presentadorPantallaDetalle.conectarPantallaDetallesConLista(presentadorListaEmpleados);
-                presentadorListaEmpleados.establecerPresentadorPantallaDetalle(presentadorPantallaDetalle);
-                
-                presentadorListaEmpleados.cargarDatos(listaInicialEmpleados);
+                PresentManager.listPresenter.cargarDatos(listaInicialEmpleados);
             }
         });
     }
