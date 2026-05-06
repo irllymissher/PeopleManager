@@ -2,6 +2,7 @@ package peopleManager.presenters;
 
 import java.util.ArrayList;
 import peopleManager.models.Empleado;
+import peopleManager.views.FilaEmpleado;
 import peopleManager.views.IListView;
 
 public class ListPresenter {
@@ -32,8 +33,18 @@ public class ListPresenter {
         this.vistaListaEmpleados.abrirLista();
     }
     
-    public void mostrarEmpleados(){
-        this.vistaListaEmpleados.cargarEmpleadoEnTabla(this.registroDeEmpleados);
+    public void mostrarEmpleados() {
+        ArrayList<FilaEmpleado> filas = new ArrayList<FilaEmpleado>();
+        for (Empleado empleado : this.registroDeEmpleados) {
+            filas.add(new FilaEmpleado(
+                empleado.getObjectId(),
+                empleado.nombreCompleto(),
+                empleado.getAntiguedad(),
+                empleado.calcularSalario(),
+                empleado.getCategoria().toString()
+            ));
+        }
+        this.vistaListaEmpleados.asignarFilaDeEmpleado(filas);
     }
     
     public void actualizarEmpleado(Empleado empleadoActualizado){
