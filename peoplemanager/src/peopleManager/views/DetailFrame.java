@@ -5,15 +5,7 @@
  */
 package peopleManager.views;
 
-import peopleManager.views.IDetailView;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import peopleManager.models.Categoria;
 import peopleManager.models.Categoria;
 import peopleManager.models.Empleado;
 /**
