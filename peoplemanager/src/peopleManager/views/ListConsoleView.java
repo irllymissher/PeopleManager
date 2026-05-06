@@ -28,21 +28,21 @@ public class ListConsoleView implements IListView{
     public String obtenerIdDelEmpleadoSeleccionado() { return this.idSeleccionado; }
 
     @Override
-    public void asignarAccionAlSeleccionarEmpleado(Runnable accionSeleccionar) { this.accionSeleccionada = accionSeleccionada; }
+    public void asignarAccionAlSeleccionarEmpleado(Runnable accionSeleccionar) { this.accionSeleccionada = accionSeleccionar; }
 
     @Override
-    public void asignarAccionParaNuevoEmpleado(Runnable accionNuevoEmpleado) { this.nuevaAccion = nuevaAccion; }
+    public void asignarAccionParaNuevoEmpleado(Runnable accionNuevoEmpleado) { this.nuevaAccion = accionNuevoEmpleado; }
 
     @Override
     public void asignarFilaDeEmpleado(ArrayList<FilaEmpleado> filaDeEmpleados){
+        System.out.println("\n--- LISTA DE EMPLEADOS ---");
+        
         for (FilaEmpleado fila : filaDeEmpleados) {
-            System.out.println("\n--- LISTA DE EMPLEADOS ---");
-            
             System.out.println(String.format("ID: %s | Nombre: %s | Antigüedad: %s | Categoría: %s | Salario: %s",
                 fila.EmpleadoId, fila.NombreCompleto, fila.Antiguedad, fila.Categoria, fila.Salario)); 
         }
         System.out.println("--------------------------------------------------");
-        System.out.println("Introduce el ID del empleado para ver detalles");
+        System.out.println("Introduce el ID del empleado para ver detalles: ");
         
         String id = sc.nextLine();
         
