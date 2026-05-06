@@ -171,5 +171,19 @@ public class ListFrame extends javax.swing.JFrame implements IListView{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public void asignarFilaDeEmpleado(ArrayList<FilaEmpleado> filaDeEmpleados) {
+        DefaultTableModel modeloTabla = (DefaultTableModel) this.jTableEmpleados.getModel();
+        modeloTabla.setRowCount(0);
+        filaDeEmpleados.forEach((fila) -> {
+            modeloTabla.addRow(new Object[]{
+                fila.EmpleadoId,
+                fila.NombreCompleto,
+                fila.Antiguedad,
+                fila.Salario,
+                fila.Categoria
+            });
+        });
+    }
     
 }
