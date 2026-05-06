@@ -29,7 +29,6 @@ public class ListPresenter {
                         empleadoEncontrado.getNombre(), 
                         empleadoEncontrado.getApellido(), 
                         empleadoEncontrado.getAntiguedad(),
-                        empleadoEncontrado.calcularSalario(),
                         empleadoEncontrado.getCategoria().toString()
                 );
                 this.presentadorPantallaDetalle.mostrarDetallesDelEmpleado(vm);

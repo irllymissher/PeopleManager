@@ -3,7 +3,6 @@ package peopleManager.presenters;
 import java.util.ArrayList;
 import peopleManager.models.Categoria;
 import peopleManager.models.Empleado;
-import peopleManager.views.FilaEmpleado;
 import peopleManager.views.FormularioEmpleado;
 import peopleManager.views.IDetailView;
 

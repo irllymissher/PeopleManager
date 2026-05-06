@@ -249,8 +249,7 @@ public class DetailFrame extends javax.swing.JFrame implements IDetailView{
                 idActual, 
                 nombreIngresado, 
                 apellidoIngresado, 
-                antiguedadIngresada, 
-                null,
+                antiguedadIngresada,
                 categoriaSeleccionada);
     }
 
