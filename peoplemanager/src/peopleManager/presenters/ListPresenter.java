@@ -3,6 +3,7 @@ package peopleManager.presenters;
 import java.util.ArrayList;
 import peopleManager.models.Empleado;
 import peopleManager.views.FilaEmpleado;
+import peopleManager.views.FormularioEmpleado;
 import peopleManager.views.IListView;
 
 public class ListPresenter {
@@ -22,14 +23,23 @@ public class ListPresenter {
                     break;
                 }
             }
-            if (this.presentadorPantallaDetalle != null)
-                this.presentadorPantallaDetalle.mostrarDetallesDelEmpleado(empleadoEncontrado);
+            if (empleadoEncontrado != null && this.presentadorPantallaDetalle != null){
+                FormularioEmpleado vm = new FormularioEmpleado(
+                        empleadoEncontrado.getObjectId(),
+                        empleadoEncontrado.getNombre(), 
+                        empleadoEncontrado.getApellido(), 
+                        empleadoEncontrado.getAntiguedad(),
+                        empleadoEncontrado.calcularSalario(),
+                        empleadoEncontrado.getCategoria().toString()
+                );
+                this.presentadorPantallaDetalle.mostrarDetallesDelEmpleado(vm);
+            }
         });
     }
     
     public void cargarDatos(ArrayList<Empleado> nuevosEmpleados){
         this.registroDeEmpleados = nuevosEmpleados;
-        this.mostrarEmpleados();
+        this.mostrarEmpleados();    
         this.vistaListaEmpleados.abrirLista();
     }
     
