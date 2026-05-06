@@ -1,8 +1,8 @@
 package peopleManager.presenters;
 
 import java.util.ArrayList;
-import peopleManager.Empleado;
-import peopleManager.IListView;
+import peopleManager.models.Empleado;
+import peopleManager.views.IListView;
 
 public class ListPresenter {
     private IListView vistaListaEmpleados;

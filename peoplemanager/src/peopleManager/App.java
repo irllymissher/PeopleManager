@@ -4,8 +4,11 @@
  */
 package peopleManager;
 
+import peopleManager.models.Empleado;
+import peopleManager.views.ListFrame;
+import peopleManager.views.DetailFrame;
 import java.util.ArrayList;
-import peopleManager.Categoria;
+import peopleManager.models.Categoria;
 import peopleManager.presenters.DetailPresenter;
 import peopleManager.presenters.ListPresenter;
 

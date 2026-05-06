@@ -1,9 +1,9 @@
 package peopleManager.presenters;
 
 import java.util.ArrayList;
-import peopleManager.Categoria;
-import peopleManager.Empleado;
-import peopleManager.IDetailView;
+import peopleManager.models.Categoria;
+import peopleManager.models.Empleado;
+import peopleManager.views.IDetailView;
 
 public class DetailPresenter {
     private IDetailView vistaPantallaDetalle;

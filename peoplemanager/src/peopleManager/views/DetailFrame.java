@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package peopleManager;
+package peopleManager.views;
 
+import peopleManager.views.IDetailView;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
@@ -12,7 +13,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import peopleManager.Categoria;
+import peopleManager.models.Categoria;
+import peopleManager.models.Categoria;
+import peopleManager.models.Empleado;
 /**
  *
  * @author tomif
@@ -66,11 +69,6 @@ public class DetailFrame extends javax.swing.JFrame implements IDetailView{
         jButtonCalcularSalario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonCalcularSalarioMouseClicked(evt);
-            }
-        });
-        jButtonCalcularSalario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonCalcularSalarioActionPerformed(evt);
             }
         });
 
