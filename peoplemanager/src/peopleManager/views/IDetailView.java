@@ -1,7 +1,6 @@
 package peopleManager.views;
 
 import java.util.ArrayList;
-import peopleManager.models.Empleado;
 
 public interface IDetailView {
     void abrirPantalla();
@@ -11,7 +10,7 @@ public interface IDetailView {
     void cargarAccionCalcular(Runnable accionCalcular);
     void cargarAccionGuardar(Runnable accionGuardar);
     
-    Empleado crearEmpleadoDesdeFormulario();
-    void mostrarDetallesDelEmpleadoSeleccionado(Empleado empleadoSeleccionado);
+    FormularioEmpleado obtenerDatosEmpleadoFormulario();
+    void mostrarDatosDeEmpleadoEnFormulario(FormularioEmpleado formularioEmpleado);
     void mostrarSalarioCalculado(String salarioResultante); /* Si no actualizarSalario */
 }

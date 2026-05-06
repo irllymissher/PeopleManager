@@ -6,8 +6,6 @@
 package peopleManager.views;
 
 import java.util.ArrayList;
-import peopleManager.models.Categoria;
-import peopleManager.models.Empleado;
 /**
  *
  * @author tomif
@@ -240,24 +238,29 @@ public class DetailFrame extends javax.swing.JFrame implements IDetailView{
     
 
     @Override
-    public Empleado crearEmpleadoDesdeFormulario(){
+    public FormularioEmpleado obtenerDatosEmpleadoFormulario(){
         String idActual = this.id;
         String categoriaSeleccionada = this.jComboBoxCategoria.getSelectedItem().toString();
-        Categoria categoriaEnum = Categoria.valueOf(categoriaSeleccionada);
         String nombreIngresado = this.jTextFieldNombreEmpleado.getText();
         String apellidoIngresado = this.jTextFieldApellidoEmpleado.getText();
         String antiguedadIngresada = this.jTextFieldAntiguedadEmpleado.getText();
         
-        return new Empleado(idActual, nombreIngresado, apellidoIngresado, antiguedadIngresada, categoriaEnum);
+        return new FormularioEmpleado(
+                idActual, 
+                nombreIngresado, 
+                apellidoIngresado, 
+                antiguedadIngresada, 
+                null,
+                categoriaSeleccionada);
     }
 
     @Override
-    public void mostrarDetallesDelEmpleadoSeleccionado(Empleado empleadoSeleccionado) {
-        this.id = empleadoSeleccionado.objectId;
-        this.jComboBoxCategoria.setSelectedItem(empleadoSeleccionado.categorias);
-        this.jTextFieldNombreEmpleado.setText(empleadoSeleccionado.nombre);
-        this.jTextFieldApellidoEmpleado.setText(empleadoSeleccionado.apellido);
-        this.jTextFieldAntiguedadEmpleado.setText(empleadoSeleccionado.antiguedad);
+    public void mostrarDatosDeEmpleadoEnFormulario(FormularioEmpleado formularioEmpleado) {
+        this.id = formularioEmpleado.EmpleadoId;
+        this.jComboBoxCategoria.setSelectedItem(formularioEmpleado.Categoria);
+        this.jTextFieldNombreEmpleado.setText(formularioEmpleado.Nombre);
+        this.jTextFieldApellidoEmpleado.setText(formularioEmpleado.Apellido);
+        this.jTextFieldAntiguedadEmpleado.setText(formularioEmpleado.Antiguedad);
     }
 
     @Override
