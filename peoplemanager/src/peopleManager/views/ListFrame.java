@@ -5,12 +5,9 @@
  */
 package peopleManager.views;
 
-import peopleManager.views.DetailFrame;
-import peopleManager.views.IListView;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import peopleManager.models.Empleado;
 
 public class ListFrame extends javax.swing.JFrame implements IListView{
     
