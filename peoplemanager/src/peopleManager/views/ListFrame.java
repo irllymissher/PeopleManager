@@ -135,19 +135,6 @@ public class ListFrame extends javax.swing.JFrame implements IListView{
      * el modelo actual de la tabla
      * @param listaDeEmpleados 
      */
-    @Override
-    public void cargarEmpleadoEnTabla(ArrayList<Empleado> listaDeEmpleados){
-        DefaultTableModel modeloTabla = (DefaultTableModel)jTableEmpleados.getModel();
-        modeloTabla.setRowCount(0);
-        listaDeEmpleados.forEach((empleadoActual) -> {modeloTabla.addRow(new Object[]{
-                empleadoActual.getObjectId(),
-                empleadoActual.getNombre(),
-                empleadoActual.getApellido(),
-                empleadoActual.getCategoria(),
-                empleadoActual.calcularSalario()
-            });
-        });
-    }
 
     @Override
     public String obtenerIdDelEmpleadoSeleccionado() {

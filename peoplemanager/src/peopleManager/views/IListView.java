@@ -10,7 +10,6 @@ import peopleManager.models.Empleado;
 */
 public interface IListView {
     void abrirLista();
-    void cargarEmpleadoEnTabla(ArrayList<Empleado> listaDeEmpleados);
     String obtenerIdDelEmpleadoSeleccionado();
     void asignarAccionAlSeleccionarEmpleado(Runnable accionSeleccionar);
     void asignarAccionParaNuevoEmpleado(Runnable accionNuevoEmpleado);
