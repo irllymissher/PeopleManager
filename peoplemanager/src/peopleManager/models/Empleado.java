@@ -56,7 +56,7 @@ public class Empleado {
         return "0";
     }
     
-    public String nameDescription(){
+    public String nombreCompleto(){
         return this.nombre + this.apellido;
     }
 
