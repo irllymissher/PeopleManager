@@ -229,6 +229,7 @@ public class DetailFrame extends javax.swing.JFrame implements IDetailView{
 
     @Override
     public void mostrarListaDeCategorias(ArrayList<String> categorias) {
+        this.jComboBoxCategoria.removeAllItems();
         for(String nombreCategoria : categorias){
             this.jComboBoxCategoria.addItem(nombreCategoria);
         }
