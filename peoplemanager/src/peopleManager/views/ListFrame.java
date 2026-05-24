@@ -159,8 +159,8 @@ public class ListFrame extends javax.swing.JFrame implements IListView{
                 fila.EmpleadoId,
                 fila.NombreCompleto,
                 fila.Antiguedad,
-                fila.Salario,
-                fila.Categoria
+                fila.Categoria,
+                fila.Salario
             });
         });
     }
