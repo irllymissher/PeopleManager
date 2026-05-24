@@ -138,8 +138,8 @@ public class ListFrame extends javax.swing.JFrame implements IListView{
         modeloTabla.setRowCount(0);
         listaDeEmpleados.forEach((empleadoActual) -> {modeloTabla.addRow(new Object[]{
                 empleadoActual.getObjectId(),
-                empleadoActual.getNombre(),
-                empleadoActual.getApellido(),
+                empleadoActual.nameDescription(),
+                empleadoActual.antiguedad,
                 empleadoActual.getCategoria(),
                 empleadoActual.calcularSalario()
             });
