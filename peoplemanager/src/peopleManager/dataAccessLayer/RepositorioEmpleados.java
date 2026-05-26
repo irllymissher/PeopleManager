@@ -35,7 +35,7 @@ public class RepositorioEmpleados {
      */
     public ArrayList<Empleado> obtenerListaEmpleados(){
         ArrayList<Empleado> clonListaEmpleados = new ArrayList<Empleado>();
-        for (Empleado empleadoClon : clonListaEmpleados) {
+        for(Empleado empleadoClon : empleados) {
             clonListaEmpleados.add(new Empleado(
                     empleadoClon.objectId, 
                     empleadoClon.nombre, 
