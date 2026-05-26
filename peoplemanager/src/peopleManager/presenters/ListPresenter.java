@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import peopleManager.dataAccessLayer.RepositorioEmpleados;
 import peopleManager.models.Empleado;
 import peopleManager.views.FilaEmpleado;
-import peopleManager.views.FormularioEmpleado;
 import peopleManager.views.IListView;
 
 public class ListPresenter {
     private IListView vistaListaEmpleados;
-    private DetailPresenter presentadorPantallaDetalle;
     private RepositorioEmpleados repoEmpleados; /* Pedir datos al repositorio */
     
     public ListPresenter(IListView vistaListaEmpleados){
@@ -20,8 +18,8 @@ public class ListPresenter {
         this.vistaListaEmpleados.asignarAccionAlSeleccionarEmpleado( ()->{
             String idSeleccionado = this.vistaListaEmpleados.obtenerIdDelEmpleadoSeleccionado();
             
-            if (idSeleccionado != null && this.presentadorPantallaDetalle != null){
-                this.presentadorPantallaDetalle.cargarEmpleadoId(idSeleccionado);
+            if (idSeleccionado != null){
+                PresentManager.detailPresenter.cargarEmpleadoPorId(idSeleccionado);
             }
         });
     }
@@ -34,7 +32,7 @@ public class ListPresenter {
     public void mostrarEmpleados() {
         ArrayList<FilaEmpleado> filas = new ArrayList<FilaEmpleado>();
         ArrayList<Empleado> empleadosAlmacen = this.repoEmpleados.obtenerListaEmpleados();
-        for (Empleado empleado : empleadosAlmacen) {
+        for(Empleado empleado : empleadosAlmacen) {
             filas.add(new FilaEmpleado(
                 empleado.getObjectId(),
                 empleado.nombreCompleto(),
@@ -55,8 +53,47 @@ public class ListPresenter {
         this.repoEmpleados.InsertarEmpleado(empleado);
         this.mostrarEmpleados();
     }
-    
-    public void establecerPresentadorPantallaDetalle(DetailPresenter presentadorPantallaDetalle){
-        this.presentadorPantallaDetalle = presentadorPantallaDetalle;
-    }
 }
+
+
+
+
+/*
+
+                [ ListPresenter ] ────( 1. Envía Objeto Empleado COMPLETO )───> [ DetailPresenter ]
+                         ▲                                                               │
+                         │                                                               │
+                         └──────( 2. Devuelve Objeto Modificado "en mano" )──────────────┘
+                                    (Dependencia Circular / Teléfono escacharrado)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[ ListPresenter ] ──────────( 1. Pasa SOLO el ID: "2" )──────────> [ DetailPresenter ]
+         │                                                                  │
+         │ (2. getAll() para pintar)                                        │ (3. GetById("2"))
+         │                                                                  │
+         ▼                                                                  ▼
+  ┌───────────────────────────────────────────────────
+  │                        [ RepositorioEmpleados (static) ]                         │
+  │                                                                                  │
+  │   📦 Casillero Común en RAM:                                                      │ 
+  │      [ID: 1] Barry Allen  (CTO)                                                  │
+  │      [ID: 2] Bruno Díaz   (BACKEND)  ◄────( 4. repo.Update() guarda aquí )───
+  │      [ID: 3] Clark Kent   (CTO)                                                  │
+  │                                                                                  │
+  └───────────────────────────────────────────────────
+*/

@@ -61,7 +61,7 @@ public class DetailPresenter {
                 datosEmpleadoAGuardar.Antiguedad, 
                 Categoria.valueOf(datosEmpleadoAGuardar.Categoria
                 ));
-        
+            
         this.vistaPantallaDetalle.cerrarPantalla();
         this.presentadorPantallaEmpleados.actualizarEmpleado(empleadoTemporal);
     }
@@ -98,3 +98,55 @@ public class DetailPresenter {
         PresentManager.listPresenter.mostrarEmpleados();
     }
 }
+
+/*
+[ App.java ] ──(Inserta 5 Héroes)──> [ empleados (RAM Estática) ] 📦 (Barry, Bruno, Clark...)
+                                                 │
+                                       (¡El bucle no miraba aquí!)
+                                                 ▼
+ [ Repositorio ] ➔ clonLista 📭 (Vacía) ──> [ FOR EACH ] 🔄 (Pregunta: "¿Hay algo dentro de clonLista?")
+                                ▲                    │
+                                │                    ▼
+                                └──────( 0 vueltas )─❌ "No, está vacía". El bucle se rompe.
+                                                     │
+                                                     ▼
+                                          Devuelve: 📭 (Lista Vacía)
+                                                     │
+                                                     ▼
+                                            [ ListPresenter ]
+                                                     │
+                                                     ▼
+                                            📺 [ PANTALLA EN BLANCO ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[ App.java ] ──(Inserta 5 Héroes)──> [ empleados (RAM Estática) ] 📦 (Barry, Bruno, Clark...)
+                                                 │
+                                                 ▼ (¡Conexión establecida!)
+ [ Repositorio ] ➔ clonLista 📭 (Vacía) ──> [ FOR EACH ] 🔄 ◄─── Recorre los 5 héroes reales
+                                ▲                    │
+                                │                    ▼
+                                └────( Inserta Clon )─ Fabricando Clon de Barry, Bruno... 
+                                                     │
+                                                     ▼
+                                          Devuelve: 📦 (Lista con 5 Clones) 
+                                                     │
+                                                     ▼
+                                            [ ListPresenter ]
+                                                     │
+                                                     ▼
+                                            📺 [ 🚀 TABLA LLENA 🚀 ]
+*/
