@@ -14,9 +14,18 @@ import peopleManager.models.Empleado;
 public class RepositorioEmpleados {
     
     /**
+     * 
+     * ----------------------ARQUITECTURA MULTICAPA-----------------------------------
      * Esto es necesario porque cada ve que se realiza un new RepositorioEmpleados()
      * se creará un objeto nuevo, pero al hacerlo static entonces todas las instacias
      * compartiran de la misma colección en memoria.
+     * -------------------------------------------------------------------------------
+     * 
+     * --------------------ARQUITECTURA EN CEBOLLA------------------------------------
+     * Se borrará porque en el Main se creara la Base de datos la cual será inyectada
+     * a todso los serviciso y presentacion, al haber una sola instancia circulando
+     * no necesitamos una lista estatica
+     * -------------------------------------------------------------------------------
      */
     public static ArrayList<Empleado> empleados = new ArrayList<Empleado>();
     

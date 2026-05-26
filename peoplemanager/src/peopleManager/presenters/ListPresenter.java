@@ -1,6 +1,7 @@
 package peopleManager.presenters;
 
 import java.util.ArrayList;
+import peopleManager.dataAccessLayer.RepositorioEmpleados;
 import peopleManager.models.Empleado;
 import peopleManager.views.FilaEmpleado;
 import peopleManager.views.FormularioEmpleado;
@@ -8,16 +9,16 @@ import peopleManager.views.IListView;
 
 public class ListPresenter {
     private IListView vistaListaEmpleados;
-    private ArrayList<Empleado> registroDeEmpleados;
     private DetailPresenter presentadorPantallaDetalle;
+    private RepositorioEmpleados repoEmpleados; /* Pedir datos al repositorio */
     
     public ListPresenter(IListView vistaListaEmpleados){
         this.vistaListaEmpleados = vistaListaEmpleados;
-        
+        this.repoEmpleados = new RepositorioEmpleados();
         this.vistaListaEmpleados.asignarAccionAlSeleccionarEmpleado( ()->{
             String idSeleccionado = this.vistaListaEmpleados.obtenerIdDelEmpleadoSeleccionado();
             Empleado empleadoEncontrado = null;
-            for (Empleado empleadoActual : this.registroDeEmpleados) {
+            for (Empleado empleadoActual : this.repoEmpleados.obtenerListaEmpleados()) {
                 if(empleadoActual.objectId.equals(idSeleccionado)){
                     empleadoEncontrado = empleadoActual;
                     break;
@@ -37,14 +38,14 @@ public class ListPresenter {
     }
     
     public void cargarDatos(ArrayList<Empleado> nuevosEmpleados){
-        this.registroDeEmpleados = nuevosEmpleados;
         this.mostrarEmpleados();    
         this.vistaListaEmpleados.abrirLista();
     }
     
     public void mostrarEmpleados() {
         ArrayList<FilaEmpleado> filas = new ArrayList<FilaEmpleado>();
-        for (Empleado empleado : this.registroDeEmpleados) {
+        ArrayList<Empleado> empleadosAlmacen = this.repoEmpleados.obtenerListaEmpleados();
+        for (Empleado empleado : empleadosAlmacen) {
             filas.add(new FilaEmpleado(
                 empleado.getObjectId(),
                 empleado.nombreCompleto(),
@@ -57,14 +58,7 @@ public class ListPresenter {
     }
     
     public void actualizarEmpleado(Empleado empleadoActualizado){
-        String idBuscado = empleadoActualizado.objectId;
-        for (int i = 0; i < registroDeEmpleados.size(); i++) {
-            Empleado empleadoActual = registroDeEmpleados.get(i);
-            if (empleadoActual.objectId.equals(idBuscado)){
-                this.registroDeEmpleados.set(i, empleadoActualizado);
-                break;
-            }
-        }
+        this.repoEmpleados.ActualizarEmpleado(empleadoActualizado);
         this.mostrarEmpleados();
     }
     
