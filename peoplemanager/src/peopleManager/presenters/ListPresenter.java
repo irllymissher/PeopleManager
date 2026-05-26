@@ -13,31 +13,20 @@ public class ListPresenter {
     private RepositorioEmpleados repoEmpleados; /* Pedir datos al repositorio */
     
     public ListPresenter(IListView vistaListaEmpleados){
+        
         this.vistaListaEmpleados = vistaListaEmpleados;
         this.repoEmpleados = new RepositorioEmpleados();
+        
         this.vistaListaEmpleados.asignarAccionAlSeleccionarEmpleado( ()->{
             String idSeleccionado = this.vistaListaEmpleados.obtenerIdDelEmpleadoSeleccionado();
-            Empleado empleadoEncontrado = null;
-            for (Empleado empleadoActual : this.repoEmpleados.obtenerListaEmpleados()) {
-                if(empleadoActual.objectId.equals(idSeleccionado)){
-                    empleadoEncontrado = empleadoActual;
-                    break;
-                }
-            }
-            if (empleadoEncontrado != null && this.presentadorPantallaDetalle != null){
-                FormularioEmpleado vm = new FormularioEmpleado(
-                        empleadoEncontrado.getObjectId(),
-                        empleadoEncontrado.getNombre(), 
-                        empleadoEncontrado.getApellido(), 
-                        empleadoEncontrado.getAntiguedad(),
-                        empleadoEncontrado.getCategoria().toString()
-                );
-                this.presentadorPantallaDetalle.mostrarDetallesDelEmpleado(vm);
+            
+            if (idSeleccionado != null && this.presentadorPantallaDetalle != null){
+                this.presentadorPantallaDetalle.cargarEmpleadoId(idSeleccionado);
             }
         });
     }
     
-    public void cargarDatos(ArrayList<Empleado> nuevosEmpleados){
+    public void cargarDatos(){
         this.mostrarEmpleados();    
         this.vistaListaEmpleados.abrirLista();
     }
@@ -63,7 +52,8 @@ public class ListPresenter {
     }
     
     public void insertarEmpleado(Empleado empleado){
-        return;
+        this.repoEmpleados.InsertarEmpleado(empleado);
+        this.mostrarEmpleados();
     }
     
     public void establecerPresentadorPantallaDetalle(DetailPresenter presentadorPantallaDetalle){

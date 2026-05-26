@@ -1,6 +1,7 @@
 package peopleManager.presenters;
 
 import java.util.ArrayList;
+import peopleManager.dataAccessLayer.RepositorioEmpleados;
 import peopleManager.models.Categoria;
 import peopleManager.models.Empleado;
 import peopleManager.views.FormularioEmpleado;
@@ -9,9 +10,12 @@ import peopleManager.views.IDetailView;
 public class DetailPresenter {
     private IDetailView vistaPantallaDetalle;
     private ListPresenter presentadorPantallaEmpleados;
+    private RepositorioEmpleados repoEmpleados;
     
     public DetailPresenter(IDetailView vistaPantallaDetalle){
+        
         this.vistaPantallaDetalle = vistaPantallaDetalle;
+        this.repoEmpleados = new RepositorioEmpleados();
         
         this.vistaPantallaDetalle.cargarAccionCalcular(() -> {
             this.calcularSalarioEmpleado();
@@ -64,5 +68,33 @@ public class DetailPresenter {
     
     public void conectarPantallaDetallesConLista(ListPresenter presentadorPantallaEmpleados){
         this.presentadorPantallaEmpleados = presentadorPantallaEmpleados;
+    }
+    
+    public void cargarEmpleadoPorId(String objectId){
+        Empleado empleadoEncontrado = this.repoEmpleados.obtenerIdEmpleado(objectId);
+        
+        if (empleadoEncontrado != null){
+            FormularioEmpleado vm = new FormularioEmpleado(
+                    empleadoEncontrado.getObjectId(),
+                    empleadoEncontrado.getNombre(), 
+                    empleadoEncontrado.getApellido(), 
+                    empleadoEncontrado.getAntiguedad(),
+                    empleadoEncontrado.getCategoria().toString()
+            );
+            this.vistaPantallaDetalle.mostrarDatosDeEmpleadoEnFormulario(vm);
+            this.vistaPantallaDetalle.abrirPantalla();
+        }
+    }
+    
+    public void guardarCambios(FormularioEmpleado vm){
+        Empleado empleadoActualizado = new Empleado(
+                vm.EmpleadoId, 
+                vm.Nombre, 
+                vm.Apellido, 
+                vm.Antiguedad, 
+                Categoria.valueOf(vm.Categoria));
+        this.repoEmpleados.ActualizarEmpleado(empleadoActualizado);
+        this.vistaPantallaDetalle.cerrarPantalla();
+        PresentManager.listPresenter.mostrarEmpleados();
     }
 }

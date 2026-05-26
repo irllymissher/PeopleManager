@@ -46,7 +46,7 @@ public class ConsoleApplication {
         ListPresenter presentadorListaDeEmpleados = new ListPresenter(vistaConsolaListaEmpleados);
         presentadorListaDeEmpleados.establecerPresentadorPantallaDetalle(presentadorPantallaDeDetallesEmpleado);
         
-        presentadorListaDeEmpleados.cargarDatos(registroDeEmpleados);
+        presentadorListaDeEmpleados.cargarDatos();
         
     }
     
