@@ -1,14 +1,15 @@
 package peopleManager;
 
-import peopleManager.models.Empleado;
-import peopleManager.views.ListFrame;
-import peopleManager.views.DetailFrame;
+import peopleManager.BusinessLogicLayer.models.Empleado;
+import peopleManager.PresentationLogicLayer.views.ListFrame;
+import peopleManager.PresentationLogicLayer.views.DetailFrame;
 import java.util.ArrayList;
-import peopleManager.dataAccessLayer.RepositorioEmpleados;
-import peopleManager.models.Categoria;
-import peopleManager.presenters.DetailPresenter;
-import peopleManager.presenters.ListPresenter;
-import peopleManager.presenters.PresentManager;
+import peopleManager.DataAccessLayer.RepositorioEmpleados;
+import peopleManager.BusinessLogicLayer.models.Categoria;
+import peopleManager.BusinessLogicLayer.services.servicioEmpleados;
+import peopleManager.PresentationLogicLayer.presenters.DetailPresenter;
+import peopleManager.PresentationLogicLayer.presenters.ListPresenter;
+import peopleManager.PresentationLogicLayer.presenters.PresentManager;
 
 /**
  *
@@ -29,9 +30,10 @@ public class App {
                 
                 ListFrame pantallaRegistroDeEmpleados = new ListFrame();
                 DetailFrame pantallaDetallesDeEmpleado = new DetailFrame();
+                servicioEmpleados servicioEmpleado = new servicioEmpleados();
                 
-                PresentManager.listPresenter = new ListPresenter(pantallaRegistroDeEmpleados);
-                PresentManager.detailPresenter = new DetailPresenter(pantallaDetallesDeEmpleado);
+                PresentManager.listPresenter = new ListPresenter(pantallaRegistroDeEmpleados, repoEmpleados);
+                PresentManager.detailPresenter = new DetailPresenter(pantallaDetallesDeEmpleado, repoEmpleados);
                 
                 PresentManager.listPresenter.cargarDatos();
             }

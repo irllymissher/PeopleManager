@@ -6,12 +6,12 @@
 package peopleManager;
 
 import java.util.ArrayList;
-import peopleManager.models.Categoria;
-import peopleManager.models.Empleado;
-import peopleManager.presenters.DetailPresenter;
-import peopleManager.presenters.ListPresenter;
-import peopleManager.views.DetailFrame;
-import peopleManager.views.ListConsoleView;
+import peopleManager.BusinessLogicLayer.models.Categoria;
+import peopleManager.BusinessLogicLayer.models.Empleado;
+import peopleManager.PresentationLogicLayer.presenters.DetailPresenter;
+import peopleManager.PresentationLogicLayer.presenters.ListPresenter;
+import peopleManager.PresentationLogicLayer.views.DetailFrame;
+import peopleManager.PresentationLogicLayer.views.ListConsoleView;
 
 /*
 ArrayList<Empleado> listaInicialEmpleados = new ArrayList<Empleado>();

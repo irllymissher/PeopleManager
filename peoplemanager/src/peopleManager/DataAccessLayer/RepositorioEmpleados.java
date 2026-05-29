@@ -1,9 +1,8 @@
-package peopleManager.dataAccessLayer;
+package peopleManager.DataAccessLayer;
 
 import java.util.ArrayList;
-import peopleManager.models.Categoria;
-import peopleManager.models.Empleado;
-
+import peopleManager.BusinessLogicLayer.models.Empleado;
+import peopleManager.BusinessLogicLayer.models.IRepositorioEmpleados;
 /**
  * ES INDISPENSABLE QUE SE DEBA DE ENVIAR COPIAS
  * DE LO CONTRARIO SE ESTARÍA MODIFICANDO EL DAO
@@ -11,14 +10,14 @@ import peopleManager.models.Empleado;
  * DE LOS DATOS.
  * @author tomif
  */
-public class RepositorioEmpleados {
+public class RepositorioEmpleados implements IRepositorioEmpleados{
     
     /**
      * 
      * ----------------------ARQUITECTURA MULTICAPA-----------------------------------
      * Esto es necesario porque cada ve que se realiza un new RepositorioEmpleados()
      * se creará un objeto nuevo, pero al hacerlo static entonces todas las instacias
-     * compartiran de la misma colección en memoria.
+     * compartiran de la misma colección en memoria
      * -------------------------------------------------------------------------------
      * 
      * --------------------ARQUITECTURA EN CEBOLLA------------------------------------
@@ -27,12 +26,13 @@ public class RepositorioEmpleados {
      * no necesitamos una lista estatica
      * -------------------------------------------------------------------------------
      */
-    public static ArrayList<Empleado> empleados = new ArrayList<Empleado>();
+    private ArrayList<Empleado> empleados = new ArrayList<Empleado>();
     
     /**
      * Creamos una lista de empleados CLON
      * @return 
      */
+    @Override
     public ArrayList<Empleado> obtenerListaEmpleados(){
         ArrayList<Empleado> clonListaEmpleados = new ArrayList<Empleado>();
         for(Empleado empleadoClon : empleados) {
@@ -54,6 +54,7 @@ public class RepositorioEmpleados {
      * @param id
      * @return 
      */
+    @Override
     public Empleado obtenerIdEmpleado(String id){
         for (Empleado empleadoClon : empleados) {
             if(empleadoClon.objectId.equals(id)){
@@ -67,13 +68,25 @@ public class RepositorioEmpleados {
         }
         return null;
     }
-    
+    @Override
     public void ActualizarEmpleado(Empleado empleado){
         String idEmpleadoActualizar = empleado.objectId;
+
         for (int i = 0; i < empleados.size(); i++) {
             Empleado empleadoActual = empleados.get(i);
+
             if (empleadoActual.objectId.equals(idEmpleadoActualizar)){
-                this.empleados.set(i, empleado);
+
+                // Fabricamos un clon con los datos actualizados para proteger el DAO
+                Empleado empleadoClon = new Empleado(
+                        empleado.objectId, 
+                        empleado.nombre, 
+                        empleado.apellido, 
+                        empleado.antiguedad, 
+                        empleado.categorias);
+
+                // Guardamos el clon, NO la referencia externa
+                this.empleados.set(i, empleadoClon);
                 break;
             }
         }
@@ -85,6 +98,7 @@ public class RepositorioEmpleados {
      * a la vista. 
      * @param empleado 
      */
+    @Override
     public void InsertarEmpleado(Empleado empleado){
         Empleado empleadoClon = new Empleado(
                 empleado.objectId, 

@@ -1,4 +1,4 @@
-package peopleManager.views;
+package peopleManager.PresentationLogicLayer.views;
 
 public class FormularioEmpleado {
     public String EmpleadoId;

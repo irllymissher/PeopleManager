@@ -1,21 +1,22 @@
-package peopleManager.presenters;
+package peopleManager.PresentationLogicLayer.presenters;
 
 import java.util.ArrayList;
-import peopleManager.dataAccessLayer.RepositorioEmpleados;
-import peopleManager.models.Categoria;
-import peopleManager.models.Empleado;
-import peopleManager.views.FormularioEmpleado;
-import peopleManager.views.IDetailView;
+import peopleManager.DataAccessLayer.RepositorioEmpleados;
+import peopleManager.BusinessLogicLayer.models.Categoria;
+import peopleManager.BusinessLogicLayer.models.Empleado;
+import peopleManager.BusinessLogicLayer.models.IRepositorioEmpleados;
+import peopleManager.PresentationLogicLayer.views.FormularioEmpleado;
+import peopleManager.PresentationLogicLayer.views.IDetailView;
 
 public class DetailPresenter {
     private IDetailView vistaPantallaDetalle;
     private ListPresenter presentadorPantallaEmpleados;
-    private RepositorioEmpleados repoEmpleados;
+    private IRepositorioEmpleados repoEmpleados;
     
-    public DetailPresenter(IDetailView vistaPantallaDetalle){
+    public DetailPresenter(IDetailView vistaPantallaDetalle, IRepositorioEmpleados repo){
         
         this.vistaPantallaDetalle = vistaPantallaDetalle;
-        this.repoEmpleados = new RepositorioEmpleados();
+        this.repoEmpleados = repo;
         
         this.vistaPantallaDetalle.cargarAccionCalcular(() -> {
             this.calcularSalarioEmpleado();
@@ -53,17 +54,23 @@ public class DetailPresenter {
     
     public void guardarEmpleado(){
         FormularioEmpleado datosEmpleadoAGuardar = this.vistaPantallaDetalle.obtenerDatosEmpleadoFormulario();
-        
+
         Empleado empleadoTemporal = new Empleado(
                 datosEmpleadoAGuardar.EmpleadoId, 
                 datosEmpleadoAGuardar.Nombre, 
                 datosEmpleadoAGuardar.Apellido, 
                 datosEmpleadoAGuardar.Antiguedad, 
-                Categoria.valueOf(datosEmpleadoAGuardar.Categoria
-                ));
-            
+                Categoria.valueOf(datosEmpleadoAGuardar.Categoria)
+        );
+
+        // 1. Guardamos los cambios directamente en el almacén usando nuestro repositorio
+        this.repoEmpleados.ActualizarEmpleado(empleadoTemporal);
+
+        // 2. Cerramos la pantalla de detalles
         this.vistaPantallaDetalle.cerrarPantalla();
-        this.presentadorPantallaEmpleados.actualizarEmpleado(empleadoTemporal);
+
+        // 3. Avisamos al presentador de la lista que vuelva a pintar los datos actualizados
+        PresentManager.listPresenter.mostrarEmpleados();
     }
     
     public void conectarPantallaDetallesConLista(ListPresenter presentadorPantallaEmpleados){
@@ -72,6 +79,13 @@ public class DetailPresenter {
     
     public void cargarEmpleadoPorId(String objectId){
         Empleado empleadoEncontrado = this.repoEmpleados.obtenerIdEmpleado(objectId);
+        
+        // 1. CARGAMOS LAS CATEGORÍAS EN EL COMBOBOX PRIMERO
+        ArrayList<String> nombreDeCategorias = new ArrayList<>();
+        for (Categoria categoriaActual : Categoria.values()) {
+            nombreDeCategorias.add(categoriaActual.name());
+        }
+        this.vistaPantallaDetalle.mostrarListaDeCategorias(nombreDeCategorias);
         
         if (empleadoEncontrado != null){
             FormularioEmpleado vm = new FormularioEmpleado(

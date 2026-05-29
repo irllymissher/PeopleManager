@@ -1,4 +1,4 @@
-package peopleManager.views;
+package peopleManager.PresentationLogicLayer.views;
 
 import java.util.ArrayList;
 

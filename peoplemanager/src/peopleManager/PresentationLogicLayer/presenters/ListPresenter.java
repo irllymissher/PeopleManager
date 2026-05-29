@@ -1,19 +1,19 @@
-package peopleManager.presenters;
+package peopleManager.PresentationLogicLayer.presenters;
 
 import java.util.ArrayList;
-import peopleManager.dataAccessLayer.RepositorioEmpleados;
-import peopleManager.models.Empleado;
-import peopleManager.views.FilaEmpleado;
-import peopleManager.views.IListView;
+import peopleManager.BusinessLogicLayer.models.Empleado;
+import peopleManager.BusinessLogicLayer.models.IRepositorioEmpleados;
+import peopleManager.PresentationLogicLayer.views.FilaEmpleado;
+import peopleManager.PresentationLogicLayer.views.IListView;
 
 public class ListPresenter {
     private IListView vistaListaEmpleados;
-    private RepositorioEmpleados repoEmpleados; /* Pedir datos al repositorio */
+    private IRepositorioEmpleados repoEmpleados;
     
-    public ListPresenter(IListView vistaListaEmpleados){
+    public ListPresenter(IListView vistaListaEmpleados, IRepositorioEmpleados repo){
         
         this.vistaListaEmpleados = vistaListaEmpleados;
-        this.repoEmpleados = new RepositorioEmpleados();
+        this.repoEmpleados = repo;
         
         this.vistaListaEmpleados.asignarAccionAlSeleccionarEmpleado( ()->{
             String idSeleccionado = this.vistaListaEmpleados.obtenerIdDelEmpleadoSeleccionado();
